@@ -2,11 +2,14 @@ package com.example.BlogPlatform.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@Builder
 @Entity
 public class BlogEntity
 {
@@ -23,4 +26,8 @@ public class BlogEntity
     @ManyToMany
     @JsonIgnore
     private Set<UserEntity> subscribers;
+
+    public BlogEntity() {
+
+    }
 }
