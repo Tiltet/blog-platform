@@ -6,11 +6,13 @@ import com.example.BlogPlatform.exception.UserAlreadyExistExeption;
 import com.example.BlogPlatform.exception.UserNotFoundException;
 import com.example.BlogPlatform.services.UserService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Setter
+@Getter
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor

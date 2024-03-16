@@ -9,12 +9,16 @@ import com.example.BlogPlatform.repositories.BlogRepo;
 import com.example.BlogPlatform.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
+@Getter
+@Setter
 @AllArgsConstructor
 @Transactional
 public class UserService
@@ -42,7 +46,7 @@ public class UserService
     {
         if (userRepo.findById(id).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь " + id + " не найден");
+            throw new UserNotFoundException(ERROR);
         }
         return userRepo.findById(id).get();
     }
@@ -52,7 +56,7 @@ public class UserService
         UserEntity user = userRepo.findById(id).get();
         if (userRepo.findById(id).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь " + id + " не найден");
+            throw new UserNotFoundException(ERROR);
         }
         userRepo.deleteById(id);
         return user;
@@ -63,7 +67,7 @@ public class UserService
         UserEntity userEntity = userRepo.findById(id).get();
         if (userRepo.findById(id).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь " + id + " не найден");
+            throw new UserNotFoundException(ERROR);
         }
         userEntity.setEmail(user.getEmail());
         userRepo.save(userEntity);

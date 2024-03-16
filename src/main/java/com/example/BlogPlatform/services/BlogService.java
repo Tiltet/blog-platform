@@ -9,11 +9,15 @@ import com.example.BlogPlatform.exception.UserNotFoundException;
 import com.example.BlogPlatform.repositories.BlogRepo;
 import com.example.BlogPlatform.repositories.UserRepo;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Getter
+@Setter
 @AllArgsConstructor
 public class BlogService
 {
