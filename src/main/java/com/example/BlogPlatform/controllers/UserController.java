@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class UserController
 {
+    private static final String ERROR = "Ошибка";
     public UserService userService;
 
     @GetMapping("/users")
@@ -25,7 +26,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -42,7 +43,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -59,7 +60,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -76,7 +77,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка " + id);
+            return ResponseEntity.badRequest().body(ERROR + id);
         }
     }
 
@@ -95,7 +96,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -113,7 +114,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка " + userId + blogId);
+            return ResponseEntity.badRequest().body(ERROR + userId + blogId);
         }
     }
 
@@ -130,7 +131,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -147,7 +148,7 @@ public class UserController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 }

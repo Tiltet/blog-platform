@@ -33,6 +33,6 @@ public class UserEntity
     private void removeUser()
     {
         blogs.clear();
-        subscriptions.forEach(subscriptions -> subscriptions.getSubscribers().removeAll(Collections.singleton(this)));
+        subscriptions.forEach(subscription -> subscription.getSubscribers().removeAll(Collections.singleton(this)));
     }
 }

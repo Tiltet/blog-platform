@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class BlogController
 {
+    private static final String ERROR = "Ошибка";
     private BlogService blogService;
 
     @PostMapping("/addBlog")
@@ -30,7 +31,7 @@ public class BlogController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -43,7 +44,7 @@ public class BlogController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -60,7 +61,7 @@ public class BlogController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 
@@ -78,7 +79,7 @@ public class BlogController
         }
         catch (Exception e)
         {
-            return ResponseEntity.badRequest().body("Ошибка");
+            return ResponseEntity.badRequest().body(ERROR);
         }
     }
 }

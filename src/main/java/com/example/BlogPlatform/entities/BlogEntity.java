@@ -33,6 +33,6 @@ public class BlogEntity
     public void removeAuthor()
     {
         author.getBlogs().removeAll(Collections.singleton(this));
-        subscribers.forEach(subscribers -> subscribers.getSubscriptions().removeAll(Collections.singleton(this)));
+        subscribers.forEach(subscriber -> subscriber.getSubscriptions().removeAll(Collections.singleton(this)));
     }
 }
