@@ -1,12 +1,12 @@
-package com.example.blogPlatform.services;
+package com.example.blog.services;
 
-import com.example.blogPlatform.entities.BlogEntity;
-import com.example.blogPlatform.entities.UserEntity;
-import com.example.blogPlatform.exception.BlogNotFoundExeption;
-import com.example.blogPlatform.exception.UserAlreadyExistExeption;
-import com.example.blogPlatform.exception.UserNotFoundException;
-import com.example.blogPlatform.repositories.BlogRepo;
-import com.example.blogPlatform.repositories.UserRepo;
+import com.example.blog.entities.BlogEntity;
+import com.example.blog.entities.UserEntity;
+import com.example.blog.exception.BlogNotFoundExeption;
+import com.example.blog.exception.UserAlreadyExistExeption;
+import com.example.blog.exception.UserNotFoundException;
+import com.example.blog.repositories.BlogRepo;
+import com.example.blog.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,10 @@
-package com.example.blogPlatform.controllers;
+package com.example.blog.controllers;
 
-import com.example.blogPlatform.entities.BlogEntity;
-import com.example.blogPlatform.exception.BlogAlreadyExistExeption;
-import com.example.blogPlatform.exception.BlogNotFoundExeption;
-import com.example.blogPlatform.exception.UserNotFoundException;
-import com.example.blogPlatform.services.BlogService;
+import com.example.blog.entities.BlogEntity;
+import com.example.blog.exception.BlogAlreadyExistExeption;
+import com.example.blog.exception.BlogNotFoundExeption;
+import com.example.blog.exception.UserNotFoundException;
+import com.example.blog.services.BlogService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
