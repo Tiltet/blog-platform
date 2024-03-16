@@ -6,9 +6,11 @@ import com.example.BlogPlatform.exception.BlogNotFoundExeption;
 import com.example.BlogPlatform.exception.UserNotFoundException;
 import com.example.BlogPlatform.services.BlogService;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Setter
 @RestController
 @RequestMapping("/api/v2")
 @AllArgsConstructor

@@ -21,6 +21,7 @@ public class UserService
 {
     private final UserRepo userRepo;
     private final BlogRepo blogRepo;
+    private static final String ERROR = "Пользователь не найден";
 
     public List<UserEntity> getUsers()
     {
@@ -73,7 +74,7 @@ public class UserService
     {
         if (userRepo.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new UserNotFoundException(ERROR);
         }
         if (blogRepo.findById(blogId).isEmpty())
         {
@@ -96,7 +97,7 @@ public class UserService
     {
         if (userRepo.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new UserNotFoundException(ERROR);
         }
 
         UserEntity user = userRepo.findById(userId).get();
@@ -108,7 +109,7 @@ public class UserService
     {
         if (userRepo.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new UserNotFoundException(ERROR);
         }
 
         UserEntity user = userRepo.findById(userId).get();
