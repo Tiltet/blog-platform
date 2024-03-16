@@ -17,7 +17,7 @@ public class BlogController
     private BlogService blogService;
 
     @PostMapping("/addBlog")
-    public ResponseEntity<?> addCard(@RequestParam Long authorId,
+    public ResponseEntity<Object> addCard(@RequestParam Long authorId,
                                   @RequestBody BlogEntity blog)
     {
         try
@@ -35,7 +35,7 @@ public class BlogController
     }
 
     @GetMapping("/blogs")
-    public ResponseEntity<?> getBlogs()
+    public ResponseEntity<Object> getBlogs()
     {
         try
         {
@@ -48,7 +48,7 @@ public class BlogController
     }
 
     @DeleteMapping("/deleteBlog")
-    public ResponseEntity<?> deleteBlog(@RequestParam Long blogId)
+    public ResponseEntity<Object> deleteBlog(@RequestParam Long blogId)
     {
         try
         {
@@ -65,7 +65,7 @@ public class BlogController
     }
 
     @PatchMapping("/changeBlogTitle")
-    public ResponseEntity<?> changeBlogTitle(@RequestParam Long blogId,
+    public ResponseEntity<Object> changeBlogTitle(@RequestParam Long blogId,
                                           @RequestBody BlogEntity blog)
     {
         try

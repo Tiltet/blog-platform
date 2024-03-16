@@ -17,7 +17,7 @@ public class UserController
     public UserService userService;
 
     @GetMapping("/users")
-    public ResponseEntity<?> getUsers()
+    public ResponseEntity<Object> getUsers()
     {
         try
         {
@@ -30,7 +30,7 @@ public class UserController
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<?> addUser(@RequestBody UserEntity user)
+    public ResponseEntity<Object> addUser(@RequestBody UserEntity user)
     {
         try
         {
@@ -47,7 +47,7 @@ public class UserController
     }
 
     @GetMapping("/user")
-    public ResponseEntity<?> findUserById(@RequestParam Long id)
+    public ResponseEntity<Object> findUserById(@RequestParam Long id)
     {
         try
         {
@@ -64,7 +64,7 @@ public class UserController
     }
 
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<?> deleteUser(@RequestParam Long id)
+    public ResponseEntity<Object> deleteUser(@RequestParam Long id)
     {
         try
         {
@@ -82,7 +82,7 @@ public class UserController
 
 
     @PatchMapping("/user")
-    public ResponseEntity<?> changeUserEmail(@RequestParam Long id,
+    public ResponseEntity<Object> changeUserEmail(@RequestParam Long id,
                                           @RequestBody UserEntity user)
     {
         try
@@ -100,7 +100,7 @@ public class UserController
     }
 
     @PostMapping("/addSubscriber")
-    public ResponseEntity<?> addSubscriber(@RequestParam Long userId,
+    public ResponseEntity<Object> addSubscriber(@RequestParam Long userId,
                                         Long blogId)
     {
         try
@@ -118,7 +118,7 @@ public class UserController
     }
 
     @GetMapping("/getAuthorBlogs")
-    public ResponseEntity<?> getAuthorBlogs(@RequestParam Long userId)
+    public ResponseEntity<Object> getAuthorBlogs(@RequestParam Long userId)
     {
         try
         {
@@ -135,7 +135,7 @@ public class UserController
     }
 
     @GetMapping("/getSubscriptions")
-    public ResponseEntity<?> getSubscriptions(@RequestParam Long userId)
+    public ResponseEntity<Object> getSubscriptions(@RequestParam Long userId)
     {
         try
         {

@@ -9,9 +9,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class BlogEntity
 {
     @Id
@@ -33,9 +34,5 @@ public class BlogEntity
     {
         author.getBlogs().removeAll(Collections.singleton(this));
         subscribers.forEach(subscribers -> subscribers.getSubscriptions().removeAll(Collections.singleton(this)));
-    }
-
-    public BlogEntity() {
-
     }
 }

@@ -8,9 +8,10 @@ import java.util.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity
 {
     @Id
@@ -27,10 +28,6 @@ public class UserEntity
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribers", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<BlogEntity> subscriptions = new HashSet<>();
-
-    public UserEntity() {
-
-    }
 
     @PreRemove
     private void removeUser()
