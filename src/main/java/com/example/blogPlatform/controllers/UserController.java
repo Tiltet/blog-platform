@@ -1,25 +1,21 @@
-package com.example.BlogPlatform.controllers;
+package com.example.blogPlatform.controllers;
 
-import com.example.BlogPlatform.entities.UserEntity;
-import com.example.BlogPlatform.exception.BlogNotFoundExeption;
-import com.example.BlogPlatform.exception.UserAlreadyExistExeption;
-import com.example.BlogPlatform.exception.UserNotFoundException;
-import com.example.BlogPlatform.services.UserService;
+import com.example.blogPlatform.entities.UserEntity;
+import com.example.blogPlatform.exception.BlogNotFoundExeption;
+import com.example.blogPlatform.exception.UserAlreadyExistExeption;
+import com.example.blogPlatform.exception.UserNotFoundException;
+import com.example.blogPlatform.services.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Setter
-@Getter
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class UserController
 {
     private static final String ERROR = "Ошибка";
-    public UserService userService;
+    private UserService userService;
 
     @GetMapping("/users")
     public ResponseEntity<Object> getUsers()

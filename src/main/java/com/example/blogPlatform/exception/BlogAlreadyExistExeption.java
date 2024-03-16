@@ -1,4 +1,4 @@
-package com.example.BlogPlatform.exception;
+package com.example.blogPlatform.exception;
 
 public class BlogAlreadyExistExeption extends Exception
 {

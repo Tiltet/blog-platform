@@ -1,4 +1,4 @@
-package com.example.BlogPlatform.entities;
+package com.example.blogPlatform.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

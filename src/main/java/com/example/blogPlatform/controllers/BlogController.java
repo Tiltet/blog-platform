@@ -1,18 +1,14 @@
-package com.example.BlogPlatform.controllers;
+package com.example.blogPlatform.controllers;
 
-import com.example.BlogPlatform.entities.BlogEntity;
-import com.example.BlogPlatform.exception.BlogAlreadyExistExeption;
-import com.example.BlogPlatform.exception.BlogNotFoundExeption;
-import com.example.BlogPlatform.exception.UserNotFoundException;
-import com.example.BlogPlatform.services.BlogService;
+import com.example.blogPlatform.entities.BlogEntity;
+import com.example.blogPlatform.exception.BlogAlreadyExistExeption;
+import com.example.blogPlatform.exception.BlogNotFoundExeption;
+import com.example.blogPlatform.exception.UserNotFoundException;
+import com.example.blogPlatform.services.BlogService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Setter
-@Getter
 @RestController
 @RequestMapping("/api/v2")
 @AllArgsConstructor

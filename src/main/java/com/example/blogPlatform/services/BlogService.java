@@ -1,13 +1,13 @@
-package com.example.BlogPlatform.services;
+package com.example.blogPlatform.services;
 
 
-import com.example.BlogPlatform.entities.BlogEntity;
-import com.example.BlogPlatform.entities.UserEntity;
-import com.example.BlogPlatform.exception.BlogAlreadyExistExeption;
-import com.example.BlogPlatform.exception.BlogNotFoundExeption;
-import com.example.BlogPlatform.exception.UserNotFoundException;
-import com.example.BlogPlatform.repositories.BlogRepo;
-import com.example.BlogPlatform.repositories.UserRepo;
+import com.example.blogPlatform.entities.BlogEntity;
+import com.example.blogPlatform.entities.UserEntity;
+import com.example.blogPlatform.exception.BlogAlreadyExistExeption;
+import com.example.blogPlatform.exception.BlogNotFoundExeption;
+import com.example.blogPlatform.exception.UserNotFoundException;
+import com.example.blogPlatform.repositories.BlogRepo;
+import com.example.blogPlatform.repositories.UserRepo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
