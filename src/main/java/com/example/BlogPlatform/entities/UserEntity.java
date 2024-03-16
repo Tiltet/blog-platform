@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -27,11 +24,18 @@ public class UserEntity
     @JsonIgnore
     private List<BlogEntity> blogs = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribers", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribers", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<BlogEntity> subscriptions = new HashSet<>();
 
     public UserEntity() {
 
+    }
+
+    @PreRemove
+    private void removeUser()
+    {
+        blogs.clear();
+        subscriptions.forEach(subscriptions -> subscriptions.getSubscribers().removeAll(Collections.singleton(this)));
     }
 }

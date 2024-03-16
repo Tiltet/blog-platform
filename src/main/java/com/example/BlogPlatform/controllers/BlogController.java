@@ -17,7 +17,7 @@ public class BlogController
     private BlogService blogService;
 
     @PostMapping("/addBlog")
-    public ResponseEntity addCard(@RequestParam Long authorId,
+    public ResponseEntity<?> addCard(@RequestParam Long authorId,
                                   @RequestBody BlogEntity blog)
     {
         try
@@ -35,7 +35,7 @@ public class BlogController
     }
 
     @GetMapping("/blogs")
-    public ResponseEntity getBlogs()
+    public ResponseEntity<?> getBlogs()
     {
         try
         {
@@ -48,13 +48,31 @@ public class BlogController
     }
 
     @DeleteMapping("/deleteBlog")
-    public ResponseEntity deleteBlog(@RequestParam Long blogId)
+    public ResponseEntity<?> deleteBlog(@RequestParam Long blogId)
     {
         try
         {
             return ResponseEntity.ok().body(blogService.deleteBlog(blogId));
         }
         catch (BlogNotFoundExeption e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body("Ошибка");
+        }
+    }
+
+    @PatchMapping("/changeBlogTitle")
+    public ResponseEntity<?> changeBlogTitle(@RequestParam Long blogId,
+                                          @RequestBody BlogEntity blog)
+    {
+        try
+        {
+            return ResponseEntity.ok().body(blogService.changeBlogTitle(blogId, blog));
+        }
+        catch (BlogNotFoundExeption | BlogAlreadyExistExeption e)
         {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

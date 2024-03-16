@@ -51,7 +51,25 @@ public class BlogService
             throw new BlogNotFoundExeption("Блог не найден");
         }
         BlogEntity blog = blogRepo.findById(blogId).get();
-        blogRepo.deleteById(blogId);
+        blogRepo.delete(blog);
         return blog;
+    }
+
+    public BlogEntity changeBlogTitle(Long blogId, BlogEntity blog) throws BlogNotFoundExeption, BlogAlreadyExistExeption
+    {
+        if (blogRepo.findById(blogId).isEmpty())
+        {
+            throw new BlogNotFoundExeption("Блог не найден");
+        }
+        if (blogRepo.findByTitle(blog.getTitle()) != null)
+        {
+            throw new BlogAlreadyExistExeption("Блог с таким названием уже существует");
+        }
+
+        BlogEntity blogEntity = blogRepo.findById(blogId).get();
+        blogEntity.setTitle(blog.getTitle());
+        blogRepo.save(blogEntity);
+
+        return blogEntity;
     }
 }

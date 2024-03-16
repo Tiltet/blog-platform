@@ -9,7 +9,6 @@ import com.example.BlogPlatform.repositories.BlogRepo;
 import com.example.BlogPlatform.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,8 +43,7 @@ public class UserService
         {
             throw new UserNotFoundException("Пользователь " + id + " не найден");
         }
-        UserEntity user = userRepo.findById(id).get();
-        return user;
+        return userRepo.findById(id).get();
     }
 
     public UserEntity deleteUser(Long id) throws UserNotFoundException

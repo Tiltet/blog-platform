@@ -17,7 +17,7 @@ public class UserController
     public UserService userService;
 
     @GetMapping("/users")
-    public ResponseEntity getUsers()
+    public ResponseEntity<?> getUsers()
     {
         try
         {
@@ -30,12 +30,11 @@ public class UserController
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity addUser(@RequestBody UserEntity user)
+    public ResponseEntity<?> addUser(@RequestBody UserEntity user)
     {
         try
         {
-            userService.addUser(user);
-            return ResponseEntity.ok().body(user);
+            return ResponseEntity.ok().body(userService.addUser(user));
         }
         catch (UserAlreadyExistExeption e)
         {
@@ -48,7 +47,7 @@ public class UserController
     }
 
     @GetMapping("/user")
-    public ResponseEntity findUserById(@RequestParam Long id)
+    public ResponseEntity<?> findUserById(@RequestParam Long id)
     {
         try
         {
@@ -65,7 +64,7 @@ public class UserController
     }
 
     @DeleteMapping("/deleteUser")
-    public ResponseEntity deleteUser(@RequestParam Long id)
+    public ResponseEntity<?> deleteUser(@RequestParam Long id)
     {
         try
         {
@@ -83,7 +82,7 @@ public class UserController
 
 
     @PatchMapping("/user")
-    public ResponseEntity changeUserEmail(@RequestParam Long id,
+    public ResponseEntity<?> changeUserEmail(@RequestParam Long id,
                                           @RequestBody UserEntity user)
     {
         try
@@ -100,8 +99,8 @@ public class UserController
         }
     }
 
-    @PatchMapping("/addSubscriber")
-    public ResponseEntity addSubscriber(@RequestParam Long userId,
+    @PostMapping("/addSubscriber")
+    public ResponseEntity<?> addSubscriber(@RequestParam Long userId,
                                         Long blogId)
     {
         try
@@ -119,7 +118,7 @@ public class UserController
     }
 
     @GetMapping("/getAuthorBlogs")
-    public ResponseEntity getAuthorBlogs(@RequestParam Long userId)
+    public ResponseEntity<?> getAuthorBlogs(@RequestParam Long userId)
     {
         try
         {
@@ -136,7 +135,7 @@ public class UserController
     }
 
     @GetMapping("/getSubscriptions")
-    public ResponseEntity getSubscriptions(@RequestParam Long userId)
+    public ResponseEntity<?> getSubscriptions(@RequestParam Long userId)
     {
         try
         {

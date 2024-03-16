@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collections;
 import java.util.Set;
 
 @Getter
@@ -19,13 +20,20 @@ public class BlogEntity
     private String title;
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private UserEntity author;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserEntity> subscribers;
+
+    @PreRemove
+    public void removeAuthor()
+    {
+        author.getBlogs().removeAll(Collections.singleton(this));
+        subscribers.forEach(subscribers -> subscribers.getSubscriptions().removeAll(Collections.singleton(this)));
+    }
 
     public BlogEntity() {
 
