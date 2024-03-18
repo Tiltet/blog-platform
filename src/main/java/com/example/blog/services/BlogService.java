@@ -1,13 +1,13 @@
 package com.example.blog.services;
 
 
-import com.example.blog.entities.BlogEntity;
-import com.example.blog.entities.UserEntity;
+import com.example.blog.entities.Blog;
+import com.example.blog.entities.User;
 import com.example.blog.exception.BlogAlreadyExistExeption;
 import com.example.blog.exception.BlogNotFoundExeption;
 import com.example.blog.exception.UserNotFoundException;
-import com.example.blog.repositories.BlogRepo;
-import com.example.blog.repositories.UserRepo;
+import com.example.blog.repositories.BlogRepository;
+import com.example.blog.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,59 +21,71 @@ import java.util.List;
 @AllArgsConstructor
 public class BlogService
 {
-    private final BlogRepo blogRepo;
-    private final UserRepo userRepo;
+    private static final String ERROR = "Блог не найден";
 
-    public List<BlogEntity> getBlogs()
+    private final BlogRepository blogRepository;
+    private final UserRepository userRepository;
+
+    public List<Blog> getBlogs()
     {
-        return blogRepo.findAll();
+        return blogRepository.findAll();
     }
 
-    public BlogEntity addBlog(Long authorId, BlogEntity blog) throws BlogAlreadyExistExeption, UserNotFoundException
+    public Blog addBlog(Long authorId, Blog blog) throws BlogAlreadyExistExeption, UserNotFoundException
     {
 
-        if (blogRepo.findByTitle(blog.getTitle()) != null)
+        if (blogRepository.findByTitle(blog.getTitle()) != null)
         {
             throw new BlogAlreadyExistExeption("Блог с таким названием уже существует");
         }
-        if (userRepo.findById(authorId).isEmpty())
+        if (userRepository.findById(authorId).isEmpty())
         {
             throw new UserNotFoundException("Такого автора не существует");
         }
-        UserEntity user = userRepo.findById(authorId).get();
+        User userEntity = userRepository.findById(authorId).get();
 
-        blog.setAuthor(user);
-        blogRepo.save(blog);
+        blog.setAuthor(userEntity);
+        blogRepository.save(blog);
 
         return blog;
     }
 
-    public BlogEntity deleteBlog(Long blogId) throws BlogNotFoundExeption
+    public Blog deleteBlog(Long blogId) throws BlogNotFoundExeption
     {
-        if (blogRepo.findById(blogId).isEmpty())
+        if (blogRepository.findById(blogId).isEmpty())
         {
-            throw new BlogNotFoundExeption("Блог не найден");
+            throw new BlogNotFoundExeption(ERROR);
         }
-        BlogEntity blog = blogRepo.findById(blogId).get();
-        blogRepo.delete(blog);
+        Blog blog = blogRepository.findById(blogId).get();
+        blogRepository.delete(blog);
         return blog;
     }
 
-    public BlogEntity changeBlogTitle(Long blogId, BlogEntity blog) throws BlogNotFoundExeption, BlogAlreadyExistExeption
+    public Blog changeBlogTitle(Long blogId, Blog blog) throws BlogNotFoundExeption, BlogAlreadyExistExeption
     {
-        if (blogRepo.findById(blogId).isEmpty())
+        if (blogRepository.findById(blogId).isEmpty())
         {
-            throw new BlogNotFoundExeption("Блог не найден");
+            throw new BlogNotFoundExeption(ERROR);
         }
-        if (blogRepo.findByTitle(blog.getTitle()) != null)
+        if (blogRepository.findByTitle(blog.getTitle()) != null)
         {
             throw new BlogAlreadyExistExeption("Блог с таким названием уже существует");
         }
 
-        BlogEntity blogEntity = blogRepo.findById(blogId).get();
+        Blog blogEntity = blogRepository.findById(blogId).get();
         blogEntity.setTitle(blog.getTitle());
-        blogRepo.save(blogEntity);
+        blogRepository.save(blogEntity);
 
         return blogEntity;
+    }
+
+    public Blog getBlog(Long blogId) throws BlogNotFoundExeption
+    {
+        if (blogRepository.findById(blogId).isEmpty())
+        {
+            throw new BlogNotFoundExeption(ERROR);
+        }
+
+        return blogRepository.findById(blogId).get();
     }
 }

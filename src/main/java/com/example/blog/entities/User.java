@@ -8,11 +8,11 @@ import java.util.*;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity
+@Table(name = "users")
+public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class UserEntity
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER)
     @JsonIgnore
-    private List<BlogEntity> blogs = new ArrayList<>();
+    private List<Blog> blogs = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribers", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<BlogEntity> subscriptions = new HashSet<>();
+    private Set<Blog> subscriptions = new HashSet<>();
 
     @PreRemove
     private void removeUser()

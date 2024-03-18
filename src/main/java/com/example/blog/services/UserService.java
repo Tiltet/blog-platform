@@ -1,12 +1,12 @@
 package com.example.blog.services;
 
-import com.example.blog.entities.BlogEntity;
-import com.example.blog.entities.UserEntity;
+import com.example.blog.entities.Blog;
+import com.example.blog.entities.User;
 import com.example.blog.exception.BlogNotFoundExeption;
 import com.example.blog.exception.UserAlreadyExistExeption;
 import com.example.blog.exception.UserNotFoundException;
-import com.example.blog.repositories.BlogRepo;
-import com.example.blog.repositories.UserRepo;
+import com.example.blog.repositories.BlogRepository;
+import com.example.blog.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,100 +23,129 @@ import java.util.Set;
 @Transactional
 public class UserService
 {
-    private final UserRepo userRepo;
-    private final BlogRepo blogRepo;
+    private final UserRepository userRepository;
+    private final BlogRepository blogRepository;
     private static final String ERROR = "Пользователь не найден";
 
-    public List<UserEntity> getUsers()
+    public List<User> getUsers()
     {
-        return userRepo.findAll();
+        return userRepository.findAll();
     }
 
-    public UserEntity addUser(UserEntity user) throws UserAlreadyExistExeption
+    public User addUser(User userEntity) throws UserAlreadyExistExeption
     {
-        if (userRepo.findByUsername(user.getUsername()) != null)
+        if (userRepository.findByUsername(userEntity.getUsername()) != null)
         {
             throw new UserAlreadyExistExeption("Пользователь с таким username уже существует");
         }
-        userRepo.save(user);
-        return user;
+        userRepository.save(userEntity);
+        return userEntity;
     }
 
-    public UserEntity findUser(Long id) throws UserNotFoundException
+    public User findUser(Long id) throws UserNotFoundException
     {
-        if (userRepo.findById(id).isEmpty())
+        if (userRepository.findById(id).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
-        return userRepo.findById(id).get();
+        return userRepository.findById(id).get();
     }
 
-    public UserEntity deleteUser(Long id) throws UserNotFoundException
+    public User deleteUser(Long id) throws UserNotFoundException
     {
-        UserEntity user = userRepo.findById(id).get();
-        if (userRepo.findById(id).isEmpty())
+        User userEntity = userRepository.findById(id).get();
+        if (userRepository.findById(id).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
-        userRepo.deleteById(id);
-        return user;
+        userRepository.deleteById(id);
+        return userEntity;
     }
 
-    public UserEntity changeUserEmail(Long id, UserEntity user) throws UserNotFoundException
+    public User changeUserEmail(Long id, User user) throws UserNotFoundException
     {
-        UserEntity userEntity = userRepo.findById(id).get();
-        if (userRepo.findById(id).isEmpty())
+        User userEntity = userRepository.findById(id).get();
+        if (userRepository.findById(id).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
         userEntity.setEmail(user.getEmail());
-        userRepo.save(userEntity);
+        userRepository.save(userEntity);
         return userEntity;
     }
 
-    public BlogEntity addSubscriber(Long userId, Long blogId) throws UserNotFoundException, BlogNotFoundExeption
+    public Blog addSubscriber(Long userId, Long blogId) throws UserNotFoundException, BlogNotFoundExeption
     {
-        if (userRepo.findById(userId).isEmpty())
+        if (userRepository.findById(userId).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
-        if (blogRepo.findById(blogId).isEmpty())
+        if (blogRepository.findById(blogId).isEmpty())
         {
             throw new BlogNotFoundExeption("Блог не найден");
         }
 
-        UserEntity user = userRepo.findById(userId).get();
-        BlogEntity blog = blogRepo.findById(blogId).get();
+        User userEntity = userRepository.findById(userId).get();
+        Blog blog = blogRepository.findById(blogId).get();
 
-        user.getSubscriptions().add(blog);
-        blog.getSubscribers().add(user);
+        userEntity.getSubscriptions().add(blog);
+        blog.getSubscribers().add(userEntity);
 
-        userRepo.save(user);
-        blogRepo.save(blog);
+        userRepository.save(userEntity);
+        blogRepository.save(blog);
 
         return blog;
     }
 
-    public List<BlogEntity> getAuthorBlogs(Long userId) throws UserNotFoundException
+    public List<Blog> getAuthorBlogs(Long userId) throws UserNotFoundException
     {
-        if (userRepo.findById(userId).isEmpty())
+        if (userRepository.findById(userId).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
 
-        UserEntity user = userRepo.findById(userId).get();
+        User userEntity = userRepository.findById(userId).get();
 
-        return user.getBlogs();
+        return userEntity.getBlogs();
     }
 
-    public Set<BlogEntity> getSubscriptions(Long userId) throws UserNotFoundException
+    public Set<Blog> getSubscriptions(Long userId) throws UserNotFoundException
     {
-        if (userRepo.findById(userId).isEmpty())
+        if (userRepository.findById(userId).isEmpty())
         {
             throw new UserNotFoundException(ERROR);
         }
 
-        UserEntity user = userRepo.findById(userId).get();
-        return user.getSubscriptions();
+        User userEntity = userRepository.findById(userId).get();
+        return userEntity.getSubscriptions();
+    }
+
+    public Set<Blog> unsubscribe(Long userId, Long blogId) throws UserNotFoundException, BlogNotFoundExeption
+    {
+        if (userRepository.findById(userId).isEmpty())
+        {
+            throw new UserNotFoundException(ERROR);
+        }
+        if (blogRepository.findById(blogId).isEmpty())
+        {
+            throw new BlogNotFoundExeption("Блог не найден");
+        }
+
+        User userEntity = userRepository.findById(userId).get();
+        Blog blog = blogRepository.findById(blogId).get();
+
+        Set<Blog> setBlogEntities = userEntity.getSubscriptions();
+        Set<User> setUserEntities = blog.getSubscribers();
+
+        setUserEntities.remove(userEntity);
+        setBlogEntities.remove(blog);
+
+        userEntity.setSubscriptions(setBlogEntities);
+        blog.setSubscribers(setUserEntities);
+
+        userRepository.save(userEntity);
+        blogRepository.save(blog);
+
+        return setBlogEntities;
     }
 }

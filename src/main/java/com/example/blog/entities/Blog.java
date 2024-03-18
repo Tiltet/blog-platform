@@ -9,11 +9,11 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class BlogEntity
+@Table(name = "blogs")
+public class Blog
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +23,11 @@ public class BlogEntity
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore
-    private UserEntity author;
+    private User author;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<UserEntity> subscribers;
+    private Set<User> subscribers;
 
     @PreRemove
     public void removeAuthor()

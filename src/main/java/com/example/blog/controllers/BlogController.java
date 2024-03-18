@@ -1,6 +1,6 @@
 package com.example.blog.controllers;
 
-import com.example.blog.entities.BlogEntity;
+import com.example.blog.entities.Blog;
 import com.example.blog.exception.BlogAlreadyExistExeption;
 import com.example.blog.exception.BlogNotFoundExeption;
 import com.example.blog.exception.UserNotFoundException;
@@ -19,7 +19,7 @@ public class BlogController
 
     @PostMapping("/addBlog")
     public ResponseEntity<Object> addCard(@RequestParam Long authorId,
-                                  @RequestBody BlogEntity blog)
+                                  @RequestBody Blog blog)
     {
         try
         {
@@ -67,7 +67,7 @@ public class BlogController
 
     @PatchMapping("/changeBlogTitle")
     public ResponseEntity<Object> changeBlogTitle(@RequestParam Long blogId,
-                                          @RequestBody BlogEntity blog)
+                                          @RequestBody Blog blog)
     {
         try
         {
@@ -76,6 +76,19 @@ public class BlogController
         catch (BlogNotFoundExeption | BlogAlreadyExistExeption e)
         {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(ERROR);
+        }
+    }
+
+    @GetMapping("/blog")
+    public ResponseEntity<Object> getBlog(@RequestParam Long blogId)
+    {
+        try
+        {
+            return ResponseEntity.ok().body(blogService.getBlog(blogId));
         }
         catch (Exception e)
         {

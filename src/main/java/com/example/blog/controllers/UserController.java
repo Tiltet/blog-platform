@@ -1,6 +1,6 @@
 package com.example.blog.controllers;
 
-import com.example.blog.entities.UserEntity;
+import com.example.blog.entities.User;
 import com.example.blog.exception.BlogNotFoundExeption;
 import com.example.blog.exception.UserAlreadyExistExeption;
 import com.example.blog.exception.UserNotFoundException;
@@ -31,11 +31,11 @@ public class UserController
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<Object> addUser(@RequestBody UserEntity user)
+    public ResponseEntity<Object> addUser(@RequestBody User userEntity)
     {
         try
         {
-            return ResponseEntity.ok().body(userService.addUser(user));
+            return ResponseEntity.ok().body(userService.addUser(userEntity));
         }
         catch (UserAlreadyExistExeption e)
         {
@@ -84,11 +84,11 @@ public class UserController
 
     @PatchMapping("/user")
     public ResponseEntity<Object> changeUserEmail(@RequestParam Long id,
-                                          @RequestBody UserEntity user)
+                                          @RequestBody User userEntity)
     {
         try
         {
-            return ResponseEntity.ok().body(userService.changeUserEmail(id, user));
+            return ResponseEntity.ok().body(userService.changeUserEmail(id, userEntity));
         }
         catch (UserNotFoundException e)
         {
@@ -145,6 +145,19 @@ public class UserController
         catch (UserNotFoundException e)
         {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(ERROR);
+        }
+    }
+
+    @DeleteMapping("/unsubscribe")
+    public ResponseEntity<Object> unsubscribe(@RequestParam Long userId, Long blogId)
+    {
+        try
+        {
+            return ResponseEntity.ok().body(userService.unsubscribe(userId, blogId));
         }
         catch (Exception e)
         {
