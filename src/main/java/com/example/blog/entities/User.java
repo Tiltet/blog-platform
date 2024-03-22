@@ -21,7 +21,7 @@ public class User
     private String password;
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnore
     private List<Blog> blogs = new ArrayList<>();
 

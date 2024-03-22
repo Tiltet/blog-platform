@@ -164,4 +164,18 @@ public class UserController
             return ResponseEntity.badRequest().body(ERROR);
         }
     }
+
+    // Кастомный вопрос получения всех Authors
+    @GetMapping("/getAuthors")
+    public ResponseEntity<Object> getAuthor()
+    {
+        try
+        {
+            return ResponseEntity.ok().body(userService.getAuthor());
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(ERROR);
+        }
+    }
 }

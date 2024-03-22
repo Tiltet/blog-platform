@@ -148,4 +148,9 @@ public class UserService
 
         return setBlogEntities;
     }
+
+    public List<User> getAuthor()
+    {
+        return userRepository.findAllAuthors();
+    }
 }
