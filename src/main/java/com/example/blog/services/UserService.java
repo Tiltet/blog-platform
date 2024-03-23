@@ -7,6 +7,7 @@ import com.example.blog.exception.UserAlreadyExistExeption;
 import com.example.blog.exception.UserNotFoundException;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
+import com.example.blog.utilities.CustomCache;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ import java.util.Set;
 @Transactional
 public class UserService
 {
+    private final CustomCache customCache;
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
     private static final String ERROR = "Пользователь не найден";
@@ -149,8 +151,21 @@ public class UserService
         return setBlogEntities;
     }
 
-    public List<User> getAuthor()
+    public List<User> getAuthors() throws InterruptedException
     {
-        return userRepository.findAllAuthors();
+        String cacheKey = "authors";
+
+        if (customCache.containsKey(cacheKey))
+        {
+            return customCache.getFromCache(cacheKey);
+            // return userRepository.findAllAuthors();
+        }
+        else
+        {
+            List<User> authors = userRepository.findAllAuthors();
+            customCache.addToCache(cacheKey, authors);
+
+            return authors;
+        }
     }
 }

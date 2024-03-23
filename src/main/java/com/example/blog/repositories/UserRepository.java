@@ -12,4 +12,11 @@ public interface UserRepository extends JpaRepository<User, Long>
 
     @Query("SELECT DISTINCT u FROM User u JOIN FETCH u.blogs")
     List<User> findAllAuthors();
+
+
+    default List<User> findAllAuthorsDELAY() throws InterruptedException
+    {
+        Thread.sleep(20);
+        return findAllAuthors();
+    }
 }

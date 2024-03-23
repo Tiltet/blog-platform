@@ -171,7 +171,7 @@ public class UserController
     {
         try
         {
-            return ResponseEntity.ok().body(userService.getAuthor());
+            return ResponseEntity.ok().body(userService.getAuthors());
         }
         catch (Exception e)
         {
