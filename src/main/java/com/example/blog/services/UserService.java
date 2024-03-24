@@ -2,9 +2,6 @@ package com.example.blog.services;
 
 import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
-import com.example.blog.exception.BlogNotFoundExeption;
-import com.example.blog.exception.UserAlreadyExistExeption;
-import com.example.blog.exception.UserNotFoundException;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @Service
 @Getter
@@ -25,64 +23,69 @@ public class UserService
 {
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
-    private static final String ERROR = "Пользователь не найден";
+    private static final Logger logger = Logger.getLogger(UserService.class.getName());
+    private static final String USER_NOT_FOUND = "User not found";
+    private static final String BLOG_NOT_FOUND = "Blog not found";
+    private static final String USER_ALREADY_EXIST = "User already exist";
+    private static final String BLOG_ALREADY_EXIST = "Blog already exist";
+
 
     public List<User> getUsers()
     {
         return userRepository.findAll();
     }
 
-    public User addUser(User userEntity) throws UserAlreadyExistExeption
+    public User addUser(User userEntity)
     {
         if (userRepository.findByUsername(userEntity.getUsername()) != null)
         {
-            throw new UserAlreadyExistExeption("Пользователь с таким username уже существует");
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         userRepository.save(userEntity);
         return userEntity;
     }
 
-    public User findUser(Long id) throws UserNotFoundException
+    public User findUser(Long id)
     {
         if (userRepository.findById(id).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         return userRepository.findById(id).get();
     }
 
-    public User deleteUser(Long id) throws UserNotFoundException
+    public User deleteUser(Long id)
     {
-        User userEntity = userRepository.findById(id).get();
         if (userRepository.findById(id).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
+        User userEntity = userRepository.findById(id).get();
         userRepository.deleteById(id);
         return userEntity;
     }
 
-    public User changeUserEmail(Long id, User user) throws UserNotFoundException
+    public User changeUserEmail(Long id, User user)
     {
-        User userEntity = userRepository.findById(id).get();
         if (userRepository.findById(id).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
+        User userEntity = userRepository.findById(id).get();
         userEntity.setEmail(user.getEmail());
         userRepository.save(userEntity);
         return userEntity;
     }
 
-    public Blog addSubscriber(Long userId, Long blogId) throws UserNotFoundException, BlogNotFoundExeption
+    public Blog addSubscriber(Long userId, Long blogId)
     {
         if (userRepository.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         if (blogRepository.findById(blogId).isEmpty())
         {
-            throw new BlogNotFoundExeption("Блог не найден");
+            throw new IllegalArgumentException(BLOG_NOT_FOUND);
         }
 
         User userEntity = userRepository.findById(userId).get();
@@ -97,38 +100,36 @@ public class UserService
         return blog;
     }
 
-    public List<Blog> getAuthorBlogs(Long userId) throws UserNotFoundException
+    public List<Blog> getAuthorBlogs(Long userId)
     {
         if (userRepository.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
-
         User userEntity = userRepository.findById(userId).get();
 
         return userEntity.getBlogs();
     }
 
-    public Set<Blog> getSubscriptions(Long userId) throws UserNotFoundException
+    public Set<Blog> getSubscriptions(Long userId)
     {
         if (userRepository.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
-
         User userEntity = userRepository.findById(userId).get();
         return userEntity.getSubscriptions();
     }
 
-    public Set<Blog> unsubscribe(Long userId, Long blogId) throws UserNotFoundException, BlogNotFoundExeption
+    public Set<Blog> unsubscribe(Long userId, Long blogId)
     {
         if (userRepository.findById(userId).isEmpty())
         {
-            throw new UserNotFoundException(ERROR);
+            throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         if (blogRepository.findById(blogId).isEmpty())
         {
-            throw new BlogNotFoundExeption("Блог не найден");
+            throw new IllegalArgumentException(BLOG_NOT_FOUND);
         }
 
         User userEntity = userRepository.findById(userId).get();
