@@ -23,7 +23,7 @@ public class User
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnore
-    private List<Blog> blogs = new ArrayList<>();
+    private Set<Blog> blogs = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "subscribers", fetch = FetchType.EAGER)
     @JsonIgnore
@@ -34,5 +34,26 @@ public class User
     {
         blogs.clear();
         subscriptions.forEach(subscription -> subscription.getSubscribers().removeAll(Collections.singleton(this)));
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+        User user = (User) o;
+        return id.equals(user.id);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return id.hashCode();
     }
 }

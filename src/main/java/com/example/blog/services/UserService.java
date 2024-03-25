@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -60,6 +61,12 @@ public class UserService
         {
             throw new UserNotFoundException(ERROR);
         }
+
+        if (userEntity.getBlogs() != null)
+        {
+            customCache.removeFromCache("authors", userEntity);
+        }
+
         userRepository.deleteById(id);
         return userEntity;
     }
@@ -99,7 +106,7 @@ public class UserService
         return blog;
     }
 
-    public List<Blog> getAuthorBlogs(Long userId) throws UserNotFoundException
+    public Set<Blog> getAuthorBlogs(Long userId) throws UserNotFoundException
     {
         if (userRepository.findById(userId).isEmpty())
         {
@@ -151,18 +158,18 @@ public class UserService
         return setBlogEntities;
     }
 
-    public List<User> getAuthors() throws InterruptedException
+    public Set<User> getAuthors()
     {
         String cacheKey = "authors";
 
         if (customCache.containsKey(cacheKey))
         {
-            return customCache.getFromCache(cacheKey);
+            return customCache.getFromCache("authors");
             // return userRepository.findAllAuthors();
         }
         else
         {
-            List<User> authors = userRepository.findAllAuthors();
+            Set<User> authors = userRepository.findAllAuthors();
             customCache.addToCache(cacheKey, authors);
 
             return authors;

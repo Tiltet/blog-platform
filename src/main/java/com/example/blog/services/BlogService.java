@@ -8,6 +8,7 @@ import com.example.blog.exception.BlogNotFoundExeption;
 import com.example.blog.exception.UserNotFoundException;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
+import com.example.blog.utilities.CustomCache;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ import java.util.List;
 public class BlogService
 {
     private static final String ERROR = "Блог не найден";
-
+    private final CustomCache customCache;
     private final BlogRepository blogRepository;
     private final UserRepository userRepository;
 
@@ -44,7 +45,16 @@ public class BlogService
         }
         User userEntity = userRepository.findById(authorId).get();
 
-        blog.setAuthor(userEntity);
+        if (userEntity.getBlogs().isEmpty())
+        {
+            blog.setAuthor(userEntity);
+            customCache.addToCacheUser("authors", userEntity);
+        }
+        else
+        {
+            blog.setAuthor(userEntity);
+        }
+
         blogRepository.save(blog);
 
         return blog;
