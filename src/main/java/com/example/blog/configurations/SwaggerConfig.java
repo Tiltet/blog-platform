@@ -9,26 +9,24 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+@SuppressWarnings("checkstyle:Indentation")
 @Configuration
-public class SwaggerConfig
-{
+public class SwaggerConfig {
     @Bean
-    public Docket api()
-    {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.blog.controllers"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.example.blog.controllers"))
+            .paths(PathSelectors.any())
+            .build()
+            .apiInfo(apiInfo());
     }
 
-    private ApiInfo apiInfo()
-    {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("My API Documentation")
-                .description("Documentation for My API")
-                .version("1.0.0")
-                .build();
+            .title("My API Documentation")
+            .description("Documentation for My API")
+            .version("1.0.0")
+            .build();
     }
 }
