@@ -1,167 +1,93 @@
 package com.example.blog.controllers;
 
+import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
-import com.example.blog.exception.BlogNotFoundExeption;
-import com.example.blog.exception.UserAlreadyExistExeption;
-import com.example.blog.exception.UserNotFoundException;
 import com.example.blog.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class UserController
 {
-    private static final String ERROR = "Ошибка";
     private UserService userService;
+    private static final Logger logger = Logger.getLogger(ControllerAdvice.class.getName());
 
     @GetMapping("/users")
-    public ResponseEntity<Object> getUsers()
+    public List<User> getUsers()
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.getUsers());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: /api/v1/users");
+        return userService.getUsers();
     }
 
     @PostMapping("/addUser")
-    public ResponseEntity<Object> addUser(@RequestBody User userEntity)
+    public User addUser(@RequestBody User userEntity)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.addUser(userEntity));
-        }
-        catch (UserAlreadyExistExeption e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v1/addUser");
+        return userService.addUser(userEntity);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<Object> findUserById(@RequestParam Long id)
+    public User findUserById(@RequestParam Long id)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.findUser(id));
-        }
-        catch (UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v1/user");
+        return userService.findUser(id);
     }
 
     @DeleteMapping("/deleteUser")
-    public ResponseEntity<Object> deleteUser(@RequestParam Long id)
+    public User deleteUser(@RequestParam Long id)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.deleteUser(id));
-        }
-        catch (UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR + id);
-        }
+        logger.info("Request: api/v1/addUser");
+        return userService.deleteUser(id);
     }
 
 
     @PatchMapping("/user")
-    public ResponseEntity<Object> changeUserEmail(@RequestParam Long id,
+    public User changeUserEmail(@RequestParam Long id,
                                           @RequestBody User userEntity)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.changeUserEmail(id, userEntity));
-        }
-        catch (UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v1/user");
+        return userService.changeUserEmail(id, userEntity);
     }
 
     @PostMapping("/addSubscriber")
-    public ResponseEntity<Object> addSubscriber(@RequestParam Long userId,
-                                        Long blogId)
+    public Blog addSubscriber(@RequestParam Long userId, Long blogId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.addSubscriber(userId, blogId));
-        }
-        catch (UserNotFoundException | BlogNotFoundExeption e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR + userId + blogId);
-        }
+        logger.info("Request: api/v1/addSubscriber");
+        return userService.addSubscriber(userId, blogId);
     }
 
     @GetMapping("/getAuthorBlogs")
-    public ResponseEntity<Object> getAuthorBlogs(@RequestParam Long userId)
+    public List<Blog> getAuthorBlogs(@RequestParam Long userId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.getAuthorBlogs(userId));
-        }
-        catch (UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v1/getAuthorBlogs");
+        return userService.getAuthorBlogs(userId);
     }
 
     @GetMapping("/getSubscriptions")
-    public ResponseEntity<Object> getSubscriptions(@RequestParam Long userId)
+    public Set<Blog> getSubscriptions(@RequestParam Long userId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.getSubscriptions(userId));
-        }
-        catch (UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v1/getSubscriptions");
+        return userService.getSubscriptions(userId);
     }
 
     @DeleteMapping("/unsubscribe")
-    public ResponseEntity<Object> unsubscribe(@RequestParam Long userId, Long blogId)
+    public Set<Blog> unsubscribe(@RequestParam Long userId, Long blogId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(userService.unsubscribe(userId, blogId));
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.severe("Request: api/v1/unsubscribe");
+        return userService.unsubscribe(userId, blogId);
+    }
+
+    // Кастомный вопрос получения всех Authors
+    @GetMapping("/getAuthors")
+    public List<User> getAuthor()
+    {
+        logger.info("Request: api/v1/getAuthors");
+        return userService.getAuthor();
     }
 }

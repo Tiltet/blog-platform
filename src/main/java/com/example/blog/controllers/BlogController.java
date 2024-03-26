@@ -1,98 +1,53 @@
 package com.example.blog.controllers;
 
 import com.example.blog.entities.Blog;
-import com.example.blog.exception.BlogAlreadyExistExeption;
-import com.example.blog.exception.BlogNotFoundExeption;
-import com.example.blog.exception.UserNotFoundException;
 import com.example.blog.services.BlogService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/v2")
 @AllArgsConstructor
 public class BlogController
 {
-    private static final String ERROR = "Ошибка";
     private BlogService blogService;
+    private static final Logger logger = Logger.getLogger(ControllerAdvice.class.getName());
 
     @PostMapping("/addBlog")
-    public ResponseEntity<Object> addCard(@RequestParam Long authorId,
-                                  @RequestBody Blog blog)
+    public Blog addCard(@RequestParam Long authorId, @RequestBody Blog blog)
     {
-        try
-        {
-            return ResponseEntity.ok().body(blogService.addBlog(authorId, blog));
-        }
-        catch (BlogAlreadyExistExeption | UserNotFoundException e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v2/addBlog");
+        return blogService.addBlog(authorId, blog);
     }
 
     @GetMapping("/blogs")
-    public ResponseEntity<Object> getBlogs()
+    public List<Blog> getBlogs()
     {
-        try
-        {
-            return ResponseEntity.ok().body(blogService.getBlogs());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v2/blogs");
+        return blogService.getBlogs();
     }
 
     @DeleteMapping("/deleteBlog")
-    public ResponseEntity<Object> deleteBlog(@RequestParam Long blogId)
+    public Blog deleteBlog(@RequestParam Long blogId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(blogService.deleteBlog(blogId));
-        }
-        catch (BlogNotFoundExeption e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v2/deleteBlog");
+        return blogService.deleteBlog(blogId);
     }
 
     @PatchMapping("/changeBlogTitle")
-    public ResponseEntity<Object> changeBlogTitle(@RequestParam Long blogId,
-                                          @RequestBody Blog blog)
+    public Blog changeBlogTitle(@RequestParam Long blogId, @RequestBody Blog blog)
     {
-        try
-        {
-            return ResponseEntity.ok().body(blogService.changeBlogTitle(blogId, blog));
-        }
-        catch (BlogNotFoundExeption | BlogAlreadyExistExeption e)
-        {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v2/changeBlogTitle");
+        return blogService.changeBlogTitle(blogId, blog);
     }
 
     @GetMapping("/blog")
-    public ResponseEntity<Object> getBlog(@RequestParam Long blogId)
+    public Blog getBlog(@RequestParam Long blogId)
     {
-        try
-        {
-            return ResponseEntity.ok().body(blogService.getBlog(blogId));
-        }
-        catch (Exception e)
-        {
-            return ResponseEntity.badRequest().body(ERROR);
-        }
+        logger.info("Request: api/v2/blog");
+        return blogService.getBlog(blogId);
     }
 }
