@@ -21,7 +21,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler({HttpClientErrorException.class})
     public ResponseEntity<Object> handleIllegalArgumentException(HttpClientErrorException e)
     {
-        logger.severe("Error 400");
+        logger.severe("Error 400: Bad Request");
         return ResponseEntity.status(e.getStatusCode()).body("Error 400\nHttp Client Error Exception\n" + e.getMessage());
     }
 
@@ -29,7 +29,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler({NoHandlerFoundException.class})
     public ResponseEntity<Object> handleNoResourceFoundException(NoHandlerFoundException e)
     {
-        logger.severe("Error 404");
+        logger.severe("Error 404: Not Found");
         return ResponseEntity.status(e.getStatusCode()).body("Error 404\nNo Handler Found Exception\n" + e.getMessage());
     }
 
@@ -37,23 +37,23 @@ public class ControllerExceptionHandler {
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public ResponseEntity<Object> handleMethodNotSupportedException(HttpRequestMethodNotSupportedException e)
     {
-        logger.severe("Error 405");
+        logger.severe("Error 405: Internal Server Error");
         return ResponseEntity.status(e.getStatusCode()).body("Error 405\nHttpRequest Method Not Supported Exception\n" + e.getMessage());
     }
 
-    // ERROR 400 -http://localhost:8080/api/v2/deleteBlog?blogId=132
+    // ERROR 500 - "username": rere,
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handlerRuntimeException(RuntimeException e)
     {
-        logger.severe("Error 400");
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error 400\nRuntime Exception\n" + e.getMessage());
+        logger.severe("Error 500: Internal Server Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error 500\nRuntime Exception\n" + e.getMessage());
     }
 
     // ERROR 404 - http://localhost:8080/api/v1/user?id=1312
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e)
     {
-        logger.severe("Error 404");
+        logger.severe("Error 404: Not Found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nIllegal Argument Exception\n" + e.getMessage());
     }
 
@@ -69,20 +69,16 @@ public class ControllerExceptionHandler {
     @ExceptionHandler({NoResourceFoundException.class})
     public ResponseEntity<Object> noResourceFoundException(NoResourceFoundException e)
     {
-        logger.severe("Error 404: Not found");
+        logger.severe("Error 404: Not Found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nNo Resource Found Exception\n" + e.getMessage());
     }
 
 
-
-
-
-
     // Default Exception
-    /* @ExceptionHandler({Exception.class})
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> Exception(Exception e)
     {
-        logger.severe("Default Exception");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unknown exeption: " + e.getMessage());
-    } */
+        logger.severe("Error 500: Internal Server Error");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unknown exeption: " + e.getMessage());
+    }
 }
