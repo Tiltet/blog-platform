@@ -5,22 +5,21 @@ import com.example.blog.entities.User;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Logger;
-
+@SuppressWarnings("checkstyle:Indentation")
 @Service
 @Getter
 @Setter
 @AllArgsConstructor
 @Transactional
-public class UserService
-{
+public class UserService {
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
@@ -30,34 +29,27 @@ public class UserService
     private static final String BLOG_ALREADY_EXIST = "Blog already exist";
 
 
-    public List<User> getUsers()
-    {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public User addUser(User userEntity)
-    {
-        if (userRepository.findByUsername(userEntity.getUsername()) != null)
-        {
+    public User addUser(User userEntity) {
+        if (userRepository.findByUsername(userEntity.getUsername()) != null) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         userRepository.save(userEntity);
         return userEntity;
     }
 
-    public User findUser(Long id)
-    {
-        if (userRepository.findById(id).isEmpty())
-        {
+    public User findUser(Long id) {
+        if (userRepository.findById(id).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         return userRepository.findById(id).get();
     }
 
-    public User deleteUser(Long id)
-    {
-        if (userRepository.findById(id).isEmpty())
-        {
+    public User deleteUser(Long id) {
+        if (userRepository.findById(id).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         User userEntity = userRepository.findById(id).get();
@@ -65,10 +57,8 @@ public class UserService
         return userEntity;
     }
 
-    public User changeUserEmail(Long id, User user)
-    {
-        if (userRepository.findById(id).isEmpty())
-        {
+    public User changeUserEmail(Long id, User user) {
+        if (userRepository.findById(id).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         User userEntity = userRepository.findById(id).get();
@@ -77,14 +67,11 @@ public class UserService
         return userEntity;
     }
 
-    public Blog addSubscriber(Long userId, Long blogId)
-    {
-        if (userRepository.findById(userId).isEmpty())
-        {
+    public Blog addSubscriber(Long userId, Long blogId) {
+        if (userRepository.findById(userId).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
-        if (blogRepository.findById(blogId).isEmpty())
-        {
+        if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);
         }
 
@@ -100,10 +87,8 @@ public class UserService
         return blog;
     }
 
-    public List<Blog> getAuthorBlogs(Long userId)
-    {
-        if (userRepository.findById(userId).isEmpty())
-        {
+    public List<Blog> getAuthorBlogs(Long userId) {
+        if (userRepository.findById(userId).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         User userEntity = userRepository.findById(userId).get();
@@ -111,24 +96,19 @@ public class UserService
         return userEntity.getBlogs();
     }
 
-    public Set<Blog> getSubscriptions(Long userId)
-    {
-        if (userRepository.findById(userId).isEmpty())
-        {
+    public Set<Blog> getSubscriptions(Long userId) {
+        if (userRepository.findById(userId).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
         User userEntity = userRepository.findById(userId).get();
         return userEntity.getSubscriptions();
     }
 
-    public Set<Blog> unsubscribe(Long userId, Long blogId)
-    {
-        if (userRepository.findById(userId).isEmpty())
-        {
+    public Set<Blog> unsubscribe(Long userId, Long blogId) {
+        if (userRepository.findById(userId).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
         }
-        if (blogRepository.findById(blogId).isEmpty())
-        {
+        if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);
         }
 
@@ -150,8 +130,7 @@ public class UserService
         return setBlogEntities;
     }
 
-    public List<User> getAuthor()
-    {
+    public List<User> getAuthor() {
         return userRepository.findAllAuthors();
     }
 }

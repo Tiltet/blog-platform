@@ -2,22 +2,22 @@ package com.example.blog.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.Collections;
 import java.util.Set;
+import lombok.*;
 
+@SuppressWarnings("checkstyle:Indentation") // аннотация, игнорирующая отступы
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "blogs")
-public class Blog
-{
+public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String description;
 
@@ -30,9 +30,9 @@ public class Blog
     private Set<User> subscribers;
 
     @PreRemove
-    public void removeAuthor()
-    {
+    public void removeAuthor() {
         author.getBlogs().removeAll(Collections.singleton(this));
-        subscribers.forEach(subscriber -> subscriber.getSubscriptions().removeAll(Collections.singleton(this)));
+        subscribers.forEach(
+            subscriber -> subscriber.getSubscriptions().removeAll(Collections.singleton(this)));
     }
 }

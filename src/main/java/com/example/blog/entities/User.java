@@ -2,21 +2,21 @@ package com.example.blog.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.*;
 import lombok.*;
 
-import java.util.*;
-
+@SuppressWarnings("checkstyle:Indentation")
 @Getter
 @Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User
-{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String password;
     private String email;
@@ -30,9 +30,9 @@ public class User
     private Set<Blog> subscriptions = new HashSet<>();
 
     @PreRemove
-    private void removeUser()
-    {
+    private void removeUser() {
         blogs.clear();
-        subscriptions.forEach(subscription -> subscription.getSubscribers().removeAll(Collections.singleton(this)));
+        subscriptions.forEach(
+            subscription -> subscription.getSubscribers().removeAll(Collections.singleton(this)));
     }
 }
