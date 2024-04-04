@@ -13,7 +13,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings("checkstyle:Indentation")
+/**
+ * JavaDoc.
+ */
+@SuppressWarnings({"checkstyle:Indentation", "checkstyle:MissingJavadocMethod"})
 @Service
 @Getter
 @Setter
