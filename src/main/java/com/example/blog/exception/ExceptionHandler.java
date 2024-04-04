@@ -12,11 +12,14 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+
+
 @SuppressWarnings({"checkstyle:Indentation", "checkstyle:LineLength"})
 @RestControllerAdvice
 public class ExceptionHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
+    private static final String NOT_FOUND = "Error 404: Not Found";
 
     // ERROR 400 Exemple: неправильный метод
     @org.springframework.web.bind.annotation.ExceptionHandler({HttpClientErrorException.class})
@@ -28,7 +31,7 @@ public class ExceptionHandler {
     // ERROR 404
     @org.springframework.web.bind.annotation.ExceptionHandler({NoHandlerFoundException.class})
     public ResponseEntity<Object> handleNoResourceFoundException(NoHandlerFoundException e) {
-        logger.error("Error 404: Not Found");
+        logger.error(NOT_FOUND);
         return ResponseEntity.status(e.getStatusCode()).body("Error 404\nNo Handler Found Exception\n" + e.getMessage());
     }
 
@@ -49,7 +52,7 @@ public class ExceptionHandler {
     // ERROR 404 - http://localhost:8080/api/v1/user?id=1312
     @org.springframework.web.bind.annotation.ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e) {
-        logger.error("Error 404: Not Found");
+        logger.error(NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nIllegal Argument Exception\n" + e.getMessage());
     }
 
@@ -63,7 +66,7 @@ public class ExceptionHandler {
     // ERROR 404 - Exemple: http://localhost:8080/api/v1/use
     @org.springframework.web.bind.annotation.ExceptionHandler({NoResourceFoundException.class})
     public ResponseEntity<Object> noResourceFoundException(NoResourceFoundException e) {
-        logger.error("Error 404: Not Found");
+        logger.error(NOT_FOUND);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nNo Resource Found Exception\n" + e.getMessage());
     }
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v2")
 @AllArgsConstructor
 public class BlogController {
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final Logger logger = LoggerFactory.getLogger(BlogController.class);
     private BlogService blogService;
 
     @PostMapping("/addBlog")
