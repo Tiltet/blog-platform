@@ -1,6 +1,5 @@
 package com.example.blog.aop;
 
-import com.example.blog.controllers.UserController;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
