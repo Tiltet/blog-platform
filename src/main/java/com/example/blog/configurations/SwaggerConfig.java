@@ -9,9 +9,12 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/** JavaDoc COMMENT. */
 @SuppressWarnings("checkstyle:Indentation")
 @Configuration
 public class SwaggerConfig {
+
+    /** JavaDoc COMMENT. */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

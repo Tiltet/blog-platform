@@ -10,6 +10,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+/**
+ * JavaDoc COMMENT.
+ */
 @SuppressWarnings("checkstyle:Indentation")
 @Service
 @Getter
@@ -28,6 +31,7 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
+    /** JavaDoc COMMENT. */
     public Blog addBlog(Long authorId, Blog blog) {
         if (userRepository.findById(authorId).isEmpty()) {
             throw new IllegalArgumentException(USER_NOT_FOUND);
@@ -41,6 +45,7 @@ public class BlogService {
         return blog;
     }
 
+    /** JavaDoc COMMENT. */
     public Blog deleteBlog(Long blogId) {
         if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);
@@ -51,6 +56,7 @@ public class BlogService {
         return blog;
     }
 
+    /** JavaDoc COMMENT. */
     public Blog changeBlogTitle(Long blogId, Blog blog) {
         if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);
@@ -63,6 +69,7 @@ public class BlogService {
         return blogEntity;
     }
 
+    /** JavaDoc COMMENT. */
     public Blog getBlog(Long blogId) {
         if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);

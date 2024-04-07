@@ -1,8 +1,5 @@
 package com.example.blog.exception;
 
-import com.example.blog.controllers.UserController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -12,69 +9,69 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-
-
+/** JavaDoc COMMENT. */
 @SuppressWarnings({"checkstyle:Indentation", "checkstyle:LineLength"})
 @RestControllerAdvice
 public class ExceptionHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
-    private static final String NOT_FOUND = "Error 404: Not Found";
-
-    // ERROR 400 Exemple: неправильный метод
+    /** ERROR 400. */
     @org.springframework.web.bind.annotation.ExceptionHandler({HttpClientErrorException.class})
-    public ResponseEntity<Object> handleIllegalArgumentException(HttpClientErrorException e) {
-        logger.error("Error 400: Bad Request");
-        return ResponseEntity.status(e.getStatusCode()).body("Error 400\nHttp Client Error Exception\n" + e.getMessage());
+    public ResponseEntity<Message> handleIllegalArgumentException(HttpClientErrorException e) {
+        String errorMessage = "ERROR 400: Http Client Error";
+        return ResponseEntity.status(e.getStatusCode()).body(new Message(errorMessage, e.getMessage()));
     }
 
-    // ERROR 404
-    @org.springframework.web.bind.annotation.ExceptionHandler({NoHandlerFoundException.class})
-    public ResponseEntity<Object> handleNoResourceFoundException(NoHandlerFoundException e) {
-        logger.error(NOT_FOUND);
-        return ResponseEntity.status(e.getStatusCode()).body("Error 404\nNo Handler Found Exception\n" + e.getMessage());
-    }
-
-    // ERROR 405
-    @org.springframework.web.bind.annotation.ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-    public ResponseEntity<Object> handleMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        logger.error("Error 405: Internal Server Error");
-        return ResponseEntity.status(e.getStatusCode()).body("Error 405\nHttpRequest Method Not Supported Exception\n" + e.getMessage());
-    }
-
-    // ERROR 500 - "username": rere,
-    @org.springframework.web.bind.annotation.ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<Object> handlerRuntimeException(RuntimeException e) {
-        logger.error("Error 500: Internal Server Error");
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error 500\nRuntime Exception\n" + e.getMessage());
-    }
-
-    // ERROR 404 - http://localhost:8080/api/v1/user?id=1312
+    /** ERROR 404 - http://localhost:8080/api/v1/user?id=1312. */
     @org.springframework.web.bind.annotation.ExceptionHandler({IllegalArgumentException.class})
-    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e) {
-        logger.error(NOT_FOUND);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nIllegal Argument Exception\n" + e.getMessage());
+    public ResponseEntity<Message> handleIllegalArgumentException(IllegalArgumentException e) {
+        String errorMessage = "Error 404: Illegal Argument";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message(errorMessage, e.getMessage()));
     }
 
-    // ERROR 400 - Exemple: http://localhost:8080/api/v1/user?id
+    /** ERROR 404. */
+    @org.springframework.web.bind.annotation.ExceptionHandler({NoHandlerFoundException.class})
+    public ResponseEntity<Message> handleNoResourceFoundException(NoHandlerFoundException e) {
+        String errorMessage = "ERROR 400: No Handler Found";
+        return ResponseEntity.status(e.getStatusCode()).body(new Message(errorMessage, e.getMessage()));
+    }
+
+    /** ERROR 405 неправильный метод. */
+    @org.springframework.web.bind.annotation.ExceptionHandler({HttpRequestMethodNotSupportedException.class})
+    public ResponseEntity<Message> handleMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        String errorMessage = "Error 405: Method Not Supported";
+        return ResponseEntity.status(e.getStatusCode()).body(new Message(errorMessage, e.getMessage()));
+    }
+
+    /** ERROR 500 - "username": rere. */
+    @org.springframework.web.bind.annotation.ExceptionHandler({RuntimeException.class})
+    public ResponseEntity<Message> handlerRuntimeException(RuntimeException e) {
+        String errorMessage = "Error 500: Runtime Exception";
+        // logger.error(errorMessage);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new Message(errorMessage, e.getMessage()));
+    }
+
+
+    /** ERROR 400 - http://localhost:8080/api/v1/user?id. */
     @org.springframework.web.bind.annotation.ExceptionHandler({MissingServletRequestParameterException.class})
-    public ResponseEntity<Object> handlerRuntimeException(MissingServletRequestParameterException e) {
-        logger.error("Error 400: Bad Request");
-        return ResponseEntity.status(e.getStatusCode()).body("Error 400\nMissing Servlet Request Parameter Exception\n" + e.getMessage());
+    public ResponseEntity<Message> handlerRuntimeException(MissingServletRequestParameterException e) {
+        String errorMessage = "Error 400: Bad Request";
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Message(errorMessage, e.getMessage()));
     }
 
-    // ERROR 404 - Exemple: http://localhost:8080/api/v1/use
+    /** ERROR 404 - http://localhost:8080/api/v1/use. */
     @org.springframework.web.bind.annotation.ExceptionHandler({NoResourceFoundException.class})
-    public ResponseEntity<Object> noResourceFoundException(NoResourceFoundException e) {
-        logger.error(NOT_FOUND);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error 404\nNo Resource Found Exception\n" + e.getMessage());
+    public ResponseEntity<Message> noResourceFoundException(NoResourceFoundException e) {
+        String errorMessage = "ERROR 404: No Resource Found";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message(errorMessage, e.getMessage()));
     }
 
-
-    // Default Exception
+    /** Default Exception. */
     @org.springframework.web.bind.annotation.ExceptionHandler({Exception.class})
-    public ResponseEntity<Object> exception(Exception e) {
-        logger.error("Error 500: Internal Server Error");
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unknown exeption: " + e.getMessage());
+    public ResponseEntity<Message> exception(Exception e) {
+        String errorMessage = "Error 500: Unknown Exception";
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message(errorMessage, e.getMessage()));
     }
+
+    private record Message(String message, String description) {}
 }
