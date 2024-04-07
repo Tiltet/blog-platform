@@ -13,9 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
-/**
- * JavaDoc COMMENT.
- */
+/** JavaDoc COMMENT. */
 @SuppressWarnings({"checkstyle:Indentation", "checkstyle:MissingJavadocMethod"})
 @Service
 @Getter
