@@ -3,10 +3,8 @@ package com.example.blog.controllers;
 import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
 import com.example.blog.services.BlogService;
-
 import java.util.List;
 import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /** Javadoc COMMENT. */
 @SuppressWarnings("checkstyle:Indentation")
 public interface BlogRepository extends JpaRepository<Blog, Long> {
-
+    Blog findByTitle(String title);
 }

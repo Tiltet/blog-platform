@@ -4,11 +4,9 @@ import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
-
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,60 +33,54 @@ public class BlogService {
         return blogRepository.findAll();
     }
 
-    /** JavaDoc COMMENT. */
+    /** Добавление блога. */
     public Blog addBlog(Long authorId, Blog blog) {
-        if (userRepository.findById(authorId).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
+        if (blogRepository.findByTitle(blog.getTitle()) != null) {
+            throw new IllegalArgumentException(BLOG_ALREADY_EXIST);
         }
 
-        User userEntity = userRepository.findById(authorId).get();
+        User user = userRepository.findById(authorId)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
 
-        blog.setAuthor(userEntity);
+        blog.setAuthor(user);
         blogRepository.save(blog);
 
         return blog;
     }
 
-    /** JavaDoc COMMENT. */
+    /** Удаление блога. */
     public Blog deleteBlog(Long blogId) {
-        if (blogRepository.findById(blogId).isEmpty()) {
-            throw new IllegalArgumentException(BLOG_NOT_FOUND);
-        }
+        Blog blog = blogRepository.findById(blogId)
+                .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
 
-        Blog blog = blogRepository.findById(blogId).get();
         blogRepository.delete(blog);
         return blog;
     }
 
-    /** JavaDoc COMMENT. */
-    public Blog changeBlogTitle(Long blogId, Blog blog) {
+    /** Получить блог. */
+    public Blog getBlog(Long blogId) {
         if (blogRepository.findById(blogId).isEmpty()) {
             throw new IllegalArgumentException(BLOG_NOT_FOUND);
         }
+        return blogRepository.findById(blogId).get();
+    }
 
-        Blog blogEntity = blogRepository.findById(blogId).get();
+    /** Изменение заголовка блога. */
+    public Blog changeBlogTitle(Long blogId, Blog blog) {
+        Blog blogEntity = blogRepository.findById(blogId)
+                .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
+
         blogEntity.setTitle(blog.getTitle());
         blogRepository.save(blogEntity);
 
         return blogEntity;
     }
 
+    /** Получить всех авторов на платформе. */
     public Set<User> getBlogsAuthors(List<Blog> blogs) {
-        Set<User> authors = new HashSet<>();
-        for (Blog blog : blogs) {
-            Blog blogEntity = blogRepository.findById(blog.getId()).get();
-            User author = blogEntity.getAuthor();
-            authors.add(author);
-        }
-        return authors;
-    }
-
-
-    /** JavaDoc COMMENT. */
-    public Blog getBlog(Long blogId) {
-        if (blogRepository.findById(blogId).isEmpty()) {
-            throw new IllegalArgumentException(BLOG_NOT_FOUND);
-        }
-        return blogRepository.findById(blogId).get();
+        return blogs.stream()
+                .map(blog -> blogRepository.findById(blog.getId())
+                        .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND)))
+                .map(Blog::getAuthor).collect(Collectors.toSet());
     }
 }
