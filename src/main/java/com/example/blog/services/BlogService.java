@@ -4,7 +4,11 @@ import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,6 +72,17 @@ public class BlogService {
 
         return blogEntity;
     }
+
+    public Set<User> getBlogsAuthors(List<Blog> blogs) {
+        Set<User> authors = new HashSet<>();
+        for (Blog blog : blogs) {
+            Blog blogEntity = blogRepository.findById(blog.getId()).get();
+            User author = blogEntity.getAuthor();
+            authors.add(author);
+        }
+        return authors;
+    }
+
 
     /** JavaDoc COMMENT. */
     public Blog getBlog(Long blogId) {
