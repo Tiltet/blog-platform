@@ -29,55 +29,43 @@ public class UserService {
     private static final String USER_ALREADY_EXIST = "User already exist";
     private static final String BLOG_ALREADY_EXIST = "Blog already exist";
 
-
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
     public User addUser(User userEntity) {
         if (userRepository.findByUsername(userEntity.getUsername()) != null) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
+            throw new IllegalArgumentException(USER_ALREADY_EXIST);
         }
         userRepository.save(userEntity);
         return userEntity;
     }
 
     public User findUser(Long id) {
-        if (userRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        return userRepository.findById(id).get();
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
     }
 
     public User deleteUser(Long id) {
-        if (userRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        User userEntity = userRepository.findById(id).get();
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
         userRepository.deleteById(id);
         return userEntity;
     }
 
     public User changeUserEmail(Long id, User user) {
-        if (userRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        User userEntity = userRepository.findById(id).get();
+        User userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
         userEntity.setEmail(user.getEmail());
         userRepository.save(userEntity);
         return userEntity;
     }
 
     public Blog addSubscriber(Long userId, Long blogId) {
-        if (userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        if (blogRepository.findById(blogId).isEmpty()) {
-            throw new IllegalArgumentException(BLOG_NOT_FOUND);
-        }
-
-        User userEntity = userRepository.findById(userId).get();
-        Blog blog = blogRepository.findById(blogId).get();
+        User userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
+        Blog blog = blogRepository.findById(blogId)
+                .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
 
         userEntity.getSubscriptions().add(blog);
         blog.getSubscribers().add(userEntity);
@@ -89,32 +77,22 @@ public class UserService {
     }
 
     public List<Blog> getAuthorBlogs(Long userId) {
-        if (userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        User userEntity = userRepository.findById(userId).get();
-
+        User userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
         return userEntity.getBlogs();
     }
 
     public Set<Blog> getSubscriptions(Long userId) {
-        if (userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        User userEntity = userRepository.findById(userId).get();
+        User userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
         return userEntity.getSubscriptions();
     }
 
     public Set<Blog> unsubscribe(Long userId, Long blogId) {
-        if (userRepository.findById(userId).isEmpty()) {
-            throw new IllegalArgumentException(USER_NOT_FOUND);
-        }
-        if (blogRepository.findById(blogId).isEmpty()) {
-            throw new IllegalArgumentException(BLOG_NOT_FOUND);
-        }
-
-        User userEntity = userRepository.findById(userId).get();
-        Blog blog = blogRepository.findById(blogId).get();
+        User userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
+        Blog blog = blogRepository.findById(blogId)
+                .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
 
         Set<Blog> setBlogEntities = userEntity.getSubscriptions();
         Set<User> setUserEntities = blog.getSubscribers();

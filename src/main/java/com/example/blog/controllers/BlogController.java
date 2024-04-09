@@ -1,8 +1,10 @@
 package com.example.blog.controllers;
 
 import com.example.blog.entities.Blog;
+import com.example.blog.entities.User;
 import com.example.blog.services.BlogService;
 import java.util.List;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,5 +47,11 @@ public class BlogController {
     @GetMapping("/blog")
     public Blog getBlog(@RequestParam Long blogId) {
         return blogService.getBlog(blogId);
+    }
+
+    /** Bulk функция. */
+    @PostMapping("/bulk")
+    public Set<User> getBlogsAuthors(@RequestBody List<Blog> blogs) {
+        return blogService.getBlogsAuthors(blogs);
     }
 }
