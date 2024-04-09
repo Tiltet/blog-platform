@@ -29,7 +29,6 @@ public class UserService {
     private static final String USER_ALREADY_EXIST = "User already exist";
     private static final String BLOG_ALREADY_EXIST = "Blog already exist";
 
-
     public List<User> getUsers() {
         return userRepository.findAll();
     }
