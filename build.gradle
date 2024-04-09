@@ -59,7 +59,7 @@ jacoco {
 	toolVersion = "0.8.10"
 }
 
-	sonar {
+sonar {
 	properties {
 		property "sonar.projectKey", "Tiltet_BlogPlatform"
 		property "sonar.organization", "tiltet"
