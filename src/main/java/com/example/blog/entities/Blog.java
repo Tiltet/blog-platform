@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PreRemove;
 import jakarta.persistence.Table;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +40,7 @@ public class Blog {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<User> subscribers;
+    private Set<User> subscribers = new HashSet<>();
 
     /** JavaDoc COMMENT. */
     @PreRemove
