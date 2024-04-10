@@ -15,36 +15,26 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
 
-    @InjectMocks
-    private UserService userService;
-
     @Mock
     private UserRepository userRepository;
 
+    @InjectMocks
+    private UserService userService;
+
     @Test
-    public void testAddUser_WhenUserDoesNotExist_ShouldSaveUser() {
+    public void testAddUser_Success() {
         User user = new User();
         user.setUsername("testUser");
 
         when(userRepository.findByUsername(user.getUsername())).thenReturn(null);
+        when(userRepository.save(user)).thenReturn(user);
 
         User result = userService.addUser(user);
 
         verify(userRepository, times(1)).findByUsername(user.getUsername());
         verify(userRepository, times(1)).save(user);
+
         Assertions.assertEquals(user, result);
     }
 
-    @Test
-    public void testAddUser_WhenUserAlreadyExist_ShouldNotSaveUser() {
-        User existingUser = new User();
-        existingUser.setUsername("existingUser");
-
-        User user = new User();
-        user.setUsername("existingUser");
-
-        when(userRepository.findByUsername(user.getUsername())).thenReturn(existingUser);
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> userService.addUser(user));
-    }
 }

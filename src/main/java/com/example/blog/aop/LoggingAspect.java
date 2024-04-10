@@ -1,6 +1,5 @@
 package com.example.blog.aop;
 
-import com.example.blog.controllers.UserController;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
     /** UserController. */
     @After("execution(* com.example.blog.controllers.UserController.*(..))")

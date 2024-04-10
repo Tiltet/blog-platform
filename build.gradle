@@ -3,8 +3,8 @@ plugins {
 	id 'org.springframework.boot' version '3.2.3'
 	id 'io.spring.dependency-management' version '1.1.4'
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.2.21"
-    id "jacoco"
 	id "org.sonarqube" version "4.4.1.3373"
+    id "jacoco"
 }
 
 group = 'com.example'
@@ -26,25 +26,37 @@ repositories {
 
 dependencies {
 
-	// swagger
-	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.2.0'
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	testImplementation 'org.mockito:mockito-core:3.12.4'
-
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mockito:mockito-core:3.12.4'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
-tasks.named('test') {
+test() {
 	useJUnitPlatform()
+	testLogging.showStandardStreams = true
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+	finalizedBy(jacocoTestReport)
+}
+
+jacocoTestReport() {
+	dependsOn test
+	reports {
+		xml.required = true
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.10"
 }
 
 sonar {

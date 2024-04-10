@@ -46,7 +46,6 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Message> handlerRuntimeException(RuntimeException e) {
         String errorMessage = "Error 500: Runtime Exception";
-        // logger.error(errorMessage);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new Message(errorMessage, e.getMessage()));
     }
