@@ -62,15 +62,15 @@ public class UserService {
     }
 
     public Blog addSubscriber(Long userId, Long blogId) {
-        User userEntity = userRepository.findById(userId)
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND));
         Blog blog = blogRepository.findById(blogId)
                 .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
 
-        userEntity.getSubscriptions().add(blog);
-        blog.getSubscribers().add(userEntity);
+        user.getSubscriptions().add(blog);
+        blog.getSubscribers().add(user);
 
-        userRepository.save(userEntity);
+        userRepository.save(user);
         blogRepository.save(blog);
 
         return blog;
