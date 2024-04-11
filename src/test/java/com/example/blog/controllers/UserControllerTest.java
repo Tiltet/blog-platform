@@ -16,7 +16,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class UserControllerTest {
+class UserControllerTest {
     @InjectMocks
     private UserController userController;
 
@@ -35,7 +35,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetUsers_ReturnsUsers() {
+    void testGetUsers_ReturnsUsers() {
         List<User> users = new ArrayList<>();
 
         User user1 = new User();
@@ -59,7 +59,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetBlogs_ReturnsEmptyList() {
+    void testGetBlogs_ReturnsEmptyList() {
         when(userService.getUsers()).thenReturn(Collections.emptyList());
 
         List<User> actualBlogs = userController.getUsers();
@@ -70,7 +70,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testAddUser_ReturnsAddedUser() {
+    void testAddUser_ReturnsAddedUser() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user1");
@@ -84,7 +84,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testAddUser_WithNullUser_ReturnsNull() {
+    void testAddUser_WithNullUser_ReturnsNull() {
         User user = null;
         when(userService.addUser(user)).thenReturn(null);
 
@@ -96,7 +96,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testFindUserById_ReturnsUser() {
+    void testFindUserById_ReturnsUser() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user1");
@@ -111,7 +111,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testFindUserById_WithNonExistingUser_ReturnsNull() {
+    void testFindUserById_WithNonExistingUser_ReturnsNull() {
         when(userService.findUser(1L)).thenReturn(null);
 
         User foundUser = userController.findUserById(1L);
@@ -122,7 +122,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteUser_ReturnsDeletedUser() {
+    void testDeleteUser_ReturnsDeletedUser() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user1");
@@ -137,7 +137,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteUser_WithNonExistingUser_ReturnsNull() {
+    void testDeleteUser_WithNonExistingUser_ReturnsNull() {
         when(userService.deleteUser(1L)).thenReturn(null);
 
         User result = userController.deleteUser(1L);
@@ -148,7 +148,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testChangeUserEmail_ReturnsModifiedUser() {
+    void testChangeUserEmail_ReturnsModifiedUser() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user1");
@@ -168,7 +168,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testChangeUserEmail_WithNonExistingUser_ReturnsNull() {
+    void testChangeUserEmail_WithNonExistingUser_ReturnsNull() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user1");
@@ -183,7 +183,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testAddSubscriber_ReturnsModifiedBlog() {
+    void testAddSubscriber_ReturnsModifiedBlog() {
 
         Blog blog = new Blog();
         blog.setId(1L);
@@ -205,7 +205,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testAddSubscriber_WithNonExistingBlog_ReturnsNull() {
+    void testAddSubscriber_WithNonExistingBlog_ReturnsNull() {
         when(userService.addSubscriber(1L, 1L)).thenReturn(null);
 
         Blog result = userController.addSubscriber(1L, 1L);
@@ -216,7 +216,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetAuthorBlogs_ReturnsListOfBlogs() {
+    void testGetAuthorBlogs_ReturnsListOfBlogs() {
         List<Blog> expectedBlogs = Arrays.asList(
                 createBlog(1L, "Blog 1", "Content 1"),
                 createBlog(2L, "Blog 2", "Content 2"),
@@ -232,7 +232,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetAuthorBlogs_WithNonExistingUser_ReturnsEmptyList() {
+    void testGetAuthorBlogs_WithNonExistingUser_ReturnsEmptyList() {
         when(userService.getAuthorBlogs(1L)).thenReturn(Collections.emptyList());
 
         List<Blog> result = userController.getAuthorBlogs(1L);
@@ -244,7 +244,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetSubscriptions_ReturnsSetOfBlogs() {
+    void testGetSubscriptions_ReturnsSetOfBlogs() {
         Set<Blog> expectedSubscriptions = new HashSet<>(Arrays.asList(
                 createBlog(1L, "Blog 1", "Content 1"),
                 createBlog(2L, "Blog 2", "Content 2"),
@@ -260,7 +260,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetSubscriptions_WithNonExistingUser_ReturnsEmptySet() {
+    void testGetSubscriptions_WithNonExistingUser_ReturnsEmptySet() {
         when(userService.getSubscriptions(1L)).thenReturn(Collections.emptySet());
 
         Set<Blog> result = userController.getSubscriptions(1L);
@@ -272,7 +272,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUnsubscribe_ReturnsUpdatedSubscriptions() {
+    void testUnsubscribe_ReturnsUpdatedSubscriptions() {
         Set<Blog> expectedSubscriptions = new HashSet<>(Arrays.asList(
                 createBlog(2L, "Blog 2", "Content 2"),
                 createBlog(3L, "Blog 3", "Content 3")
@@ -287,7 +287,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUnsubscribe_WithNonExistingSubscription_ReturnsUnchangedSubscriptions() {
+    void testUnsubscribe_WithNonExistingSubscription_ReturnsUnchangedSubscriptions() {
         Set<Blog> subscriptions = new HashSet<>(Arrays.asList(
                 createBlog(2L, "Blog 2", "Content 2"),
                 createBlog(3L, "Blog 3", "Content 3")
@@ -302,7 +302,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetAuthors_ReturnsListOfAuthors() {
+    void testGetAuthors_ReturnsListOfAuthors() {
 
         List<User> expectedAuthors = Arrays.asList(
                 createUser(1L, "John"),
@@ -319,7 +319,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetAuthors_WithNoAuthors_ReturnsEmptyList() {
+    void testGetAuthors_WithNoAuthors_ReturnsEmptyList() {
         when(userService.getAuthor()).thenReturn(Collections.emptyList());
 
         List<User> result = userController.getAuthor();

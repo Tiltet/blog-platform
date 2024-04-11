@@ -59,10 +59,8 @@ public class BlogService {
 
     /** Получить блог. */
     public Blog getBlog(Long blogId) {
-        if (blogRepository.findById(blogId).isEmpty()) {
-            throw new IllegalArgumentException(BLOG_NOT_FOUND);
-        }
-        return blogRepository.findById(blogId).get();
+        return blogRepository.findById(blogId)
+                .orElseThrow(() -> new IllegalArgumentException(BLOG_NOT_FOUND));
     }
 
     /** Изменение заголовка блога. */

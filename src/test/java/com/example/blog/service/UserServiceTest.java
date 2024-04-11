@@ -28,7 +28,7 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void testAddUser_UserDoesNotExist_ShouldSaveUser() {
+    void testAddUser_UserDoesNotExist_ShouldSaveUser() {
         User user = new User();
         user.setUsername("testUser");
 
@@ -42,7 +42,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testAddUser_UserAlreadyExist_ShouldNotSaveUser() {
+    void testAddUser_UserAlreadyExist_ShouldNotSaveUser() {
         User existingUser = new User();
         existingUser.setUsername("existingUser");
 
@@ -55,7 +55,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetUsers_ReturnsAllUsers() {
+    void testGetUsers_ReturnsAllUsers() {
         User user1 = new User();
         user1.setId(1L);
         user1.setUsername("user1");
@@ -79,7 +79,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetBlogs_ReturnsEmptyListWhenNoBlogsExist() {
+    void testGetBlogs_ReturnsEmptyListWhenNoBlogsExist() {
         List<User> users = Collections.emptyList();
 
         when(userRepository.findAll()).thenReturn(users);
@@ -91,7 +91,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testFindUser_WhenUserDoesNotExist_ShouldThrowIllegalArgumentException() {
+    void testFindUser_WhenUserDoesNotExist_ShouldThrowIllegalArgumentException() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -100,7 +100,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testFindUser_WhenUserExist_ShouldFindUser() {
+    void testFindUser_WhenUserExist_ShouldFindUser() {
         User user = new User();
         user.setId(2L);
 
@@ -112,7 +112,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser_WhenUserExists_ShouldDeleteAndReturnUser() {
+    void testDeleteUser_WhenUserExists_ShouldDeleteAndReturnUser() {
         User userToDelete = new User();
         userToDelete.setId(1L);
 
@@ -126,7 +126,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser_WhenUserDoesNotExist_ShouldThrowException() {
+    void testDeleteUser_WhenUserDoesNotExist_ShouldThrowException() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -138,7 +138,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testChangeUserEmail_WhenUserExists_ShouldChangeAndReturnUser() {
+    void testChangeUserEmail_WhenUserExists_ShouldChangeAndReturnUser() {
         String newEmail = "newemail@example.com";
         User existingUser = new User();
         existingUser.setId(1L);
@@ -159,7 +159,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testChangeUserEmail_WhenUserDoesNotExist_ShouldThrowException() {
+    void testChangeUserEmail_WhenUserDoesNotExist_ShouldThrowException() {
         User userToUpdate = new User();
         userToUpdate.setId(1L);
 
@@ -174,7 +174,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testAddSubscriber_WhenUserAndBlogExist_ShouldAddSubscriberAndReturnBlog() {
+    void testAddSubscriber_WhenUserAndBlogExist_ShouldAddSubscriberAndReturnBlog() {
         User existingUser = new User();
         existingUser.setId(1L);
 
@@ -197,7 +197,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testAddSubscriber_WhenUserDoesNotExist_ShouldThrowException() {
+    void testAddSubscriber_WhenUserDoesNotExist_ShouldThrowException() {
         Blog existingBlog = new Blog();
         existingBlog.setId(1L);
 
@@ -214,7 +214,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testAddSubscriber_WhenBlogDoesNotExist_ShouldThrowException() {
+    void testAddSubscriber_WhenBlogDoesNotExist_ShouldThrowException() {
         User existingUser = new User();
         existingUser.setId(1L);
 
@@ -232,7 +232,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAuthorBlogs_WhenUserExists_ShouldReturnBlogs() {
+    void testGetAuthorBlogs_WhenUserExists_ShouldReturnBlogs() {
         User user = new User();
         List<Blog> expectedBlogs = new ArrayList<>();
         expectedBlogs.add(new Blog());
@@ -247,7 +247,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAuthorBlogs_WhenUserDoesNotExist_ShouldThrowException() {
+    void testGetAuthorBlogs_WhenUserDoesNotExist_ShouldThrowException() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -256,7 +256,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetSubscriptions_WhenUserExists_ShouldReturnSubscriptions() {
+    void testGetSubscriptions_WhenUserExists_ShouldReturnSubscriptions() {
         User user = new User();
         Set<Blog> expectedSubscriptions = new HashSet<>();
         expectedSubscriptions.add(new Blog());
@@ -271,7 +271,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetSubscriptions_WhenUserDoesNotExist_ShouldThrowException() {
+    void testGetSubscriptions_WhenUserDoesNotExist_ShouldThrowException() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -280,7 +280,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUnsubscribe_WhenUserAndBlogExist_ShouldReturnUpdatedSubscriptions() {
+    void testUnsubscribe_WhenUserAndBlogExist_ShouldReturnUpdatedSubscriptions() {
         User user = new User();
         user.setId(1L);
         Set<Blog> userSubscriptions = new HashSet<>();
@@ -305,7 +305,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUnsubscribe_WhenUserNotFound_ShouldThrowException() {
+    void testUnsubscribe_WhenUserNotFound_ShouldThrowException() {
         when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -325,7 +325,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAuthor_WhenAuthorsExist_ShouldReturnAuthors() {
+    void testGetAuthor_WhenAuthorsExist_ShouldReturnAuthors() {
         List<User> expectedAuthors = new ArrayList<>();
         User author1 = new User();
         author1.setId(1L);
@@ -345,7 +345,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testGetAuthor_WhenNoAuthorsExist_ShouldReturnEmptyList() {
+    void testGetAuthor_WhenNoAuthorsExist_ShouldReturnEmptyList() {
         List<User> expectedAuthors = new ArrayList<>();
         when(userRepository.findAllAuthors()).thenReturn(expectedAuthors);
 
