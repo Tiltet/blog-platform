@@ -25,7 +25,7 @@ public class BlogController {
     private BlogService blogService;
 
     @PostMapping("/addBlog")
-    public Blog addCard(@RequestParam Long authorId, @RequestBody Blog blog) {
+    public Blog addBlog(@RequestParam Long authorId, @RequestBody Blog blog) {
         return blogService.addBlog(authorId, blog);
     }
 
