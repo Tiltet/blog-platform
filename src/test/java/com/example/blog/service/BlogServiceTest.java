@@ -210,9 +210,10 @@ class BlogServiceTest {
 
         when(blogRepository.findById(1L)).thenReturn(Optional.empty());
 
+        Blog updatedBlog = new Blog();
+        updatedBlog.setTitle(newTitle);
+
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Blog updatedBlog = new Blog();
-            updatedBlog.setTitle(newTitle);
             blogService.changeBlogTitle(1L, updatedBlog);
         });
 

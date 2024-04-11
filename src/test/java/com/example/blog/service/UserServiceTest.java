@@ -314,7 +314,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void testUnsubscribe_WhenBlogNotFound_ShouldThrowException() {
+    void testUnsubscribe_WhenBlogNotFound_ShouldThrowException() {
         User user = new User();
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         when(blogRepository.findById(1L)).thenReturn(Optional.empty());
