@@ -16,7 +16,7 @@ import java.util.*;
 
 import static org.mockito.Mockito.*;
 
-public class BlogServiceTest {
+class BlogServiceTest {
 
     @Mock
     private BlogRepository blogRepository;
@@ -28,12 +28,12 @@ public class BlogServiceTest {
     private BlogService blogService;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testAddBlog_WhenBlogDoesNotExist_ShouldReturnBlog() {
+    void testAddBlog_WhenBlogDoesNotExist_ShouldReturnBlog() {
         Blog blog = new Blog();
         blog.setTitle("My Blog");
 
@@ -55,7 +55,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testAddBlog_WhenBlogExists_ShouldThrowException() {
+    void testAddBlog_WhenBlogExists_ShouldThrowException() {
         Blog blog = new Blog();
         blog.setTitle("My Blog");
 
@@ -71,7 +71,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testAddBlog_WhenAuthorNotFound_ShouldThrowException() {
+    void testAddBlog_WhenAuthorNotFound_ShouldThrowException() {
         Blog blog = new Blog();
         blog.setTitle("My Blog");
 
@@ -88,7 +88,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testGetBlogs_WhenBlogsExist_ShouldReturnBlogs() {
+    void testGetBlogs_WhenBlogsExist_ShouldReturnBlogs() {
         Blog blog1 = new Blog();
         blog1.setId(1L);
         blog1.setTitle("blog1");
@@ -119,7 +119,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testGetBlogs_WhenNoBlogsExist_ShouldReturnEmptyList() {
+    void testGetBlogs_WhenNoBlogsExist_ShouldReturnEmptyList() {
         List<Blog> emptyList = new ArrayList<>();
 
         when(blogRepository.findAll()).thenReturn(emptyList);
@@ -132,7 +132,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testDeleteBlog_WhenBlogExists_ShouldReturnDeletedBlog() {
+    void testDeleteBlog_WhenBlogExists_ShouldReturnDeletedBlog() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("blog");
@@ -148,7 +148,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testDeleteBlog_WhenBlogDoesNotExist_ShouldThrowException() {
+    void testDeleteBlog_WhenBlogDoesNotExist_ShouldThrowException() {
         when(blogRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -160,7 +160,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testGetBlog_WhenBlogExists_ShouldReturnBlog() {
+    void testGetBlog_WhenBlogExists_ShouldReturnBlog() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("Test Blog");
@@ -171,11 +171,11 @@ public class BlogServiceTest {
 
         Assertions.assertEquals(blog, result);
 
-        verify(blogRepository, times(2)).findById(1L);
+        verify(blogRepository, times(1)).findById(1L);
     }
 
     @Test
-    public void testGetBlog_WhenBlogDoesNotExist_ShouldThrowException() {
+    void testGetBlog_WhenBlogDoesNotExist_ShouldThrowException() {
         when(blogRepository.findById(1L)).thenReturn(Optional.empty());
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -186,7 +186,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testChangeBlogTitle_WhenBlogExists_ShouldChangeTitle() {
+    void testChangeBlogTitle_WhenBlogExists_ShouldChangeTitle() {
         String newTitle = "New Title";
         Blog existingBlog = new Blog();
         existingBlog.setId(1L);
@@ -205,7 +205,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testChangeBlogTitle_WhenBlogDoesNotExist_ShouldThrowException() {
+    void testChangeBlogTitle_WhenBlogDoesNotExist_ShouldThrowException() {
         String newTitle = "New Title";
 
         when(blogRepository.findById(1L)).thenReturn(Optional.empty());
@@ -221,7 +221,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testGetBlogsAuthors_WhenBlogsExist_ShouldReturnAuthors() {
+    void testGetBlogsAuthors_WhenBlogsExist_ShouldReturnAuthors() {
         Blog blog1 = new Blog();
         blog1.setId(1L);
         blog1.setTitle("Blog 1");
@@ -254,7 +254,7 @@ public class BlogServiceTest {
     }
 
     @Test
-    public void testGetBlogsAuthors_WhenBlogNotFound_ShouldThrowException() {
+    void testGetBlogsAuthors_WhenBlogNotFound_ShouldThrowException() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("Blog 1");

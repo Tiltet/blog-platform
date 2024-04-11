@@ -1,5 +1,6 @@
 package com.example.blog.exception;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 /** JavaDoc COMMENT. */
 @SuppressWarnings({"checkstyle:Indentation", "checkstyle:LineLength"})
 @RestControllerAdvice
-public class ExceptionHandler {
+public class ExceptionHandler extends HttpHeaders {
 
     /** ERROR 400. */
     @org.springframework.web.bind.annotation.ExceptionHandler({HttpClientErrorException.class})
@@ -21,7 +22,7 @@ public class ExceptionHandler {
         return ResponseEntity.status(e.getStatusCode()).body(new Message(errorMessage, e.getMessage()));
     }
 
-    /** ERROR 404 - http://localhost:8080/api/v1/user?id=1312. */
+    /** ERROR 404 - localhost:8080/api/v1/user?id=1312. */
     @org.springframework.web.bind.annotation.ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<Message> handleIllegalArgumentException(IllegalArgumentException e) {
         String errorMessage = "Error 404: Illegal Argument";
@@ -51,14 +52,14 @@ public class ExceptionHandler {
     }
 
 
-    /** ERROR 400 - http://localhost:8080/api/v1/user?id. */
+    /** ERROR 400 - localhost:8080/api/v1/user?id. */
     @org.springframework.web.bind.annotation.ExceptionHandler({MissingServletRequestParameterException.class})
     public ResponseEntity<Message> handlerRuntimeException(MissingServletRequestParameterException e) {
         String errorMessage = "Error 400: Bad Request";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Message(errorMessage, e.getMessage()));
     }
 
-    /** ERROR 404 - http://localhost:8080/api/v1/use. */
+    /** ERROR 404 - localhost:8080/api/v1/use. */
     @org.springframework.web.bind.annotation.ExceptionHandler({NoResourceFoundException.class})
     public ResponseEntity<Message> noResourceFoundException(NoResourceFoundException e) {
         String errorMessage = "ERROR 404: No Resource Found";
@@ -72,5 +73,5 @@ public class ExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message(errorMessage, e.getMessage()));
     }
 
-    private record Message(String message, String description) {}
+    record Message(String message, String description) {}
 }

@@ -17,7 +17,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class BlogControllerTest {
+class BlogControllerTest {
     @InjectMocks
     private BlogController blogController;
 
@@ -36,7 +36,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testAddCard_WithExistingAuthor_ShouldReturnNewBlog() {
+    void testAddCard_WithExistingAuthor_ShouldReturnNewBlog() {
         User user = new User();
         user.setId(1L);
         user.setUsername("user");
@@ -57,7 +57,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testAddCard_WithNonExistingAuthor_ShouldThrowException() {
+    void testAddCard_WithNonExistingAuthor_ShouldThrowException() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("New Blog");
@@ -65,14 +65,14 @@ public class BlogControllerTest {
         when(blogService.addBlog(1L, blog)).thenThrow(IllegalArgumentException.class);
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Blog response = blogController.addBlog(1L, blog);
+            blogController.addBlog(1L, blog);
         });
 
         verify(blogService, times(1)).addBlog(1L, blog);
     }
 
     @Test
-    public void testGetBlogs_ReturnsEmptyList() {
+    void testGetBlogs_ReturnsEmptyList() {
         when(blogService.getBlogs()).thenReturn(Collections.emptyList());
 
         List<Blog> actualBlogs = blogController.getBlogs();
@@ -83,7 +83,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testGetBlogs_ReturnsBlogs() {
+    void testGetBlogs_ReturnsBlogs() {
         List<Blog> expectedBlogs = new ArrayList<>();
 
         Blog blog1 = new Blog();
@@ -107,7 +107,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testDeleteBlog_ExistingBlog_ReturnsDeletedBlog() {
+    void testDeleteBlog_ExistingBlog_ReturnsDeletedBlog() {
         Blog deletedBlog = new Blog();
         deletedBlog.setId(1L);
         deletedBlog.setTitle("blog1");
@@ -122,7 +122,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testDeleteBlog_NonExistingBlog_ReturnsNull() {
+    void testDeleteBlog_NonExistingBlog_ReturnsNull() {
         when(blogService.deleteBlog(1L)).thenReturn(null);
 
         Blog actualDeletedBlog = blogController.deleteBlog(1L);
@@ -133,7 +133,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testChangeBlogTitle_ExistingBlog_ReturnsUpdatedBlog() {
+    void testChangeBlogTitle_ExistingBlog_ReturnsUpdatedBlog() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("blog1");
@@ -148,7 +148,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testChangeBlogTitle_NonExistingBlog_ReturnsNull() {
+    void testChangeBlogTitle_NonExistingBlog_ReturnsNull() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("blog1");
@@ -163,7 +163,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testGetBlog_ExistingBlog_ReturnsBlog() {
+    void testGetBlog_ExistingBlog_ReturnsBlog() {
         Blog blog = new Blog();
         blog.setId(1L);
         blog.setTitle("blog1");
@@ -178,7 +178,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testGetBlog_NonExistingBlog_ReturnsNull() {
+    void testGetBlog_NonExistingBlog_ReturnsNull() {
         when(blogService.getBlog(1L)).thenReturn(null);
 
         Blog actualBlog = blogController.getBlog(1L);
@@ -189,7 +189,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testGetBlogsAuthors_ReturnsAuthorsSet() {
+    void testGetBlogsAuthors_ReturnsAuthorsSet() {
         Blog blog1 = new Blog();
         blog1.setId(1L);
         blog1.setTitle("blog1");
@@ -224,7 +224,7 @@ public class BlogControllerTest {
     }
 
     @Test
-    public void testGetBlogsAuthors_EmptyBlogsList_ReturnsEmptySet() {
+    void testGetBlogsAuthors_EmptyBlogsList_ReturnsEmptySet() {
         List<Blog> blogs = new ArrayList<>();
 
         Set<User> expectedAuthors = new HashSet<>();
