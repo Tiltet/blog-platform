@@ -73,5 +73,5 @@ public class ExceptionHandler extends HttpHeaders {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Message(errorMessage, e.getMessage()));
     }
 
-    record Message(String message, String description) {}
+    public record Message(String message, String description) {}
 }
