@@ -1,0 +1,37 @@
+/* line 1, ../sass/header.sass */
+.header {
+  padding: 20px;
+  background-color: #202124;
+}
+/* line 4, ../sass/header.sass */
+.header_menu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* line 9, ../sass/header.sass */
+.header_menu h1 {
+  font-size: 48px;
+}
+/* line 11, ../sass/header.sass */
+.header_menu ul {
+  display: flex;
+  justify-content: end;
+  list-style-type: none;
+}
+/* line 15, ../sass/header.sass */
+.header_menu ul li {
+  font-size: 24px;
+  padding: 0 30px;
+}
+/* line 18, ../sass/header.sass */
+.header_menu_button {
+  border-radius: 10px;
+  border: none;
+}
+/* line 21, ../sass/header.sass */
+.header_menu_button p {
+  font-size: 28px;
+  padding: 0 40px;
+}
