@@ -1,5 +1,6 @@
 package com.example.blog.aop;
 
+import com.example.blog.component.RequestCounter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,6 +15,11 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     private final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
+    private final RequestCounter requestCounter;
+
+    public LoggingAspect(RequestCounter requestCounter) {
+        this.requestCounter = requestCounter;
+    }
 
     /** UserController. */
     @After("execution(* com.example.blog.controllers.UserController.*(..))")
@@ -38,4 +44,17 @@ public class LoggingAspect {
         String className = joinPoint.getTarget().getClass().getSimpleName();
         logger.error("ERROR: {}.{}", className, methodName);
     }
+
+    @After("execution(* com.example.blog.controllers.UserController.*(..))")
+    public void logRequest() {
+        requestCounter.incrementAndGet();
+    }
+
+    /*
+    @PreDestroy
+    public void logRequestCount() {
+        logger.info("Total number of requests: {}", requestCounter.getCounter());
+    }
+
+     */
 }
