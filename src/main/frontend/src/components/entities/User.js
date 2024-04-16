@@ -8,6 +8,7 @@ class User extends React.Component {
         return (
             <div className="user">
                 <h3>{this.user.id}</h3>
+                <p>{this.user.username}</p>
             </div>
         );  
     }

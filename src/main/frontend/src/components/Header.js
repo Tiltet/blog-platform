@@ -4,6 +4,7 @@ import React from "react"
 import '../stylesheets/header.css'
 
 class Header extends React.Component {
+
    render() {
       return (
          <header className="header">
@@ -12,10 +13,18 @@ class Header extends React.Component {
                   <h1>{this.props.title}</h1>
                   <nav>
                      <ul>
-                        <li><a href="#">Главная</a></li>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Услуги</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li>
+                           <a href="/blogs">Blogs</a>
+                        </li>
+                        <li>
+                           <a href="/users">Users</a>
+                        </li>
+                        <li>
+                           <a href="/services">Услуги</a>
+                        </li>
+                        <li>
+                           <a href="/contacts">Контакты</a>
+                        </li>
                      </ul>
                   </nav>
                   <button className="header_menu_button">
