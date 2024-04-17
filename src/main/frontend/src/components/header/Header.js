@@ -1,7 +1,6 @@
 // Header.js
 
 import React from "react"
-import '../stylesheets/header.css'
 
 class Header extends React.Component {
 
@@ -14,27 +13,24 @@ class Header extends React.Component {
                   <nav>
                      <ul>
                         <li>
-                           <a href="/blogs">Blogs</a>
+                           <a href="/home">Главная страница</a>
                         </li>
                         <li>
-                           <a href="/users">Users</a>
+                           <a href="/blogs">Блоги</a>
                         </li>
                         <li>
-                           <a href="/services">Услуги</a>
+                           <a href="/authors">Авторы</a>
                         </li>
                         <li>
-                           <a href="/contacts">Контакты</a>
+                           <a href="/profile">Профиль</a>
                         </li>
                      </ul>
                   </nav>
-                  <button className="header_menu_button">
-                     <p>Войти</p>
-                  </button>
                </div>
             </div>
          </header>
-        );  
-    }
+      );
+   }
 }
 
 export default Header;

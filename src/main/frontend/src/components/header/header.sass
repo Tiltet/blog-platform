@@ -1,0 +1,43 @@
+// Header
+
+@import "../../sass/_variable"
+@import "../../sass/_mixins"
+
+.header
+    position: static
+    padding: 20px
+    background-color: $header-color
+    &_menu
+        width: 100%
+        display: flex
+        justify-content: space-between
+        align-items: center
+        h1
+            font-size: 48px
+        ul
+            display: flex
+            justify-content: end
+            list-style-type: none 
+            li
+                font-size: 24px
+                padding: 0 20px
+
+@include laptop
+    .header
+        &_menu
+            h1
+                font-size: 36px
+            ul
+                li
+                    padding: 0 15px
+                    font-size: 18px
+
+@include table
+    .header
+        &_menu
+            h1
+                font-size: 36px
+            ul
+                li
+                    padding: 0 10px
+                    font-size: 14px

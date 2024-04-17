@@ -2,9 +2,12 @@
 
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Blogs from "./components/Blogs";
-import Users from "./components/Users";
+import Header from "./components/header/Header";
+import HomePage from "./pages/home/HomePage";
+import SignIn from "./components/signin/SignIn";
+import Blogs from "./components/blogs/Blogs";
+import Authors from "./components/authors/Authors";
+import User from "./components/user/User";
 
 class App extends React.Component {
 
@@ -14,8 +17,11 @@ class App extends React.Component {
                 <div className="App">
                     <Header title="Blog Platform"/>
                     <Routes>
-                        <Route path="/blogs" element={<Blogs />} />
-                        <Route path="/users" element={<Users />} />
+                        <Route path="/home" element={<HomePage />} />
+                        <Route path="/blogs" element={<Blogs/>} />
+                        <Route path="/authors" element={<Authors/>} />
+                        <Route path="/profile" element={<SignIn/>} />
+                        <Route path="/user" render={({ location }) => <User location={location} />} />
                     </Routes>
                 </div>
             </Router>

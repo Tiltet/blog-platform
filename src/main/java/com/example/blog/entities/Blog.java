@@ -33,6 +33,7 @@ public class Blog {
 
     private String title;
     private String description;
+    private String img;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore

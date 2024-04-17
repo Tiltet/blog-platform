@@ -38,6 +38,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String avatar;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author",
             fetch = FetchType.EAGER, orphanRemoval = true)
