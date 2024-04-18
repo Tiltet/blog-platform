@@ -7,84 +7,126 @@
 
 /* line 6, ../components/header/header.sass */
 .header {
-  position: static;
+  position: fixed;
+  width: 100%;
   padding: 20px;
   background-color: #202124; }
-  /* line 10, ../components/header/header.sass */
-  .header_menu {
+  /* line 11, ../components/header/header.sass */
+  .header_nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center; }
-    /* line 15, ../components/header/header.sass */
-    .header_menu h1 {
+    /* line 16, ../components/header/header.sass */
+    .header_nav h1 {
       font-size: 48px; }
-    /* line 17, ../components/header/header.sass */
-    .header_menu ul {
+    /* line 18, ../components/header/header.sass */
+    .header_nav_menu {
       display: flex;
       justify-content: end;
       list-style-type: none; }
-      /* line 21, ../components/header/header.sass */
-      .header_menu ul li {
+      /* line 22, ../components/header/header.sass */
+      .header_nav_menu li {
         font-size: 24px;
         padding: 0 20px; }
+    /* line 25, ../components/header/header.sass */
+    .header_nav_menu.active {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(30px);
+      overflow: hidden;
+      transform: translateY(0);
+      transition: transform 0.5s ease; }
+      /* line 33, ../components/header/header.sass */
+      .header_nav_menu.active li {
+        padding-top: 50px; }
+        /* line 35, ../components/header/header.sass */
+        .header_nav_menu.active li a {
+          font-size: 24px;
+          color: white; }
+
+/* line 40, ../components/header/header.sass */
+.burger {
+  position: absolute;
+  top: 35px;
+  right: 20px;
+  z-index: 2;
+  display: none; }
+  /* line 46, ../components/header/header.sass */
+  .burger span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin-bottom: 5px; }
 
 @media (max-width: 1024px) {
-  /* line 28, ../components/header/header.sass */
-  .header_menu h1 {
+  /* line 56, ../components/header/header.sass */
+  .header_nav h1 {
     font-size: 36px; }
-  /* line 31, ../components/header/header.sass */
-  .header_menu ul li {
+  /* line 59, ../components/header/header.sass */
+  .header_nav ul li {
     padding: 0 15px;
     font-size: 18px; } }
 @media (max-width: 767px) {
-  /* line 38, ../components/header/header.sass */
-  .header_menu h1 {
+  /* line 66, ../components/header/header.sass */
+  .header_nav h1 {
     font-size: 36px; }
-  /* line 41, ../components/header/header.sass */
-  .header_menu ul li {
-    padding: 0 10px;
-    font-size: 14px; } }
+  /* line 68, ../components/header/header.sass */
+  .header_nav ul {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    transform: translateY(-100%); }
+    /* line 77, ../components/header/header.sass */
+    .header_nav ul li {
+      padding: 0 10px;
+      font-size: 14px; }
+
+  /* line 80, ../components/header/header.sass */
+  .burger {
+    display: block; } }
 /* line 3, ../components/authors/authors.sass */
 .authors {
+  padding-top: 110px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap; }
-  /* line 7, ../components/authors/authors.sass */
+  /* line 8, ../components/authors/authors.sass */
   .authors .author {
     min-height: 450px;
     border-radius: 25px;
     flex: 0 1 22%;
     margin: 20px 10px 0 10px;
     background-color: #202124; }
-    /* line 13, ../components/authors/authors.sass */
+    /* line 14, ../components/authors/authors.sass */
     .authors .author img {
       border: 5px solid #000;
       margin: 0 auto;
       min-width: 300px;
       min-height: 300px;
+      width: 300px;
+      height: 300px;
       border-radius: 25px; }
-    /* line 19, ../components/authors/authors.sass */
+    /* line 22, ../components/authors/authors.sass */
     .authors .author h1 {
       padding-top: 20px;
       text-align: center;
       font-size: 36px; }
-    /* line 23, ../components/authors/authors.sass */
+    /* line 26, ../components/authors/authors.sass */
     .authors .author p {
       text-align: center;
       font-size: 24px; }
-    /* line 26, ../components/authors/authors.sass */
+    /* line 29, ../components/authors/authors.sass */
     .authors .author button {
       width: 220px;
-      display: block;
       margin: 10px auto;
-      padding: 5px 10px;
-      background-color: #80b64b;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 18px; }
+      padding: 5px 10px; }
 
 /* line 3, ../components/blogs/blogs.sass */
 .blogs {
@@ -96,17 +138,16 @@
   .blogs .blog {
     border-radius: 25px;
     flex: 0 1 22%;
-    margin: 0 10px;
-    height: 100%;
+    margin: 10px;
     background-color: #202124; }
-    /* line 14, ../components/blogs/blogs.sass */
+    /* line 13, ../components/blogs/blogs.sass */
     .blogs .blog img {
       border-radius: 25px;
       border: 5px solid #000;
       margin: 0 auto;
       min-height: 300px;
       min-width: 300px; }
-    /* line 20, ../components/blogs/blogs.sass */
+    /* line 19, ../components/blogs/blogs.sass */
     .blogs .blog h1 {
       margin: 10px 0;
       text-align: center; }
@@ -177,13 +218,54 @@
       font-size: 36px;
       padding: 0 10px; }
 
-/* line 13, ../sass/index.sass */
+/* line 1, ../components/user/user.sass */
+.profile {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center; }
+  /* line 5, ../components/user/user.sass */
+  .profile img {
+    display: block;
+    border-radius: 25px;
+    border: 2px solid #000;
+    width: 500px;
+    height: 500px; }
+  /* line 11, ../components/user/user.sass */
+  .profile_description {
+    padding: 0 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    /* line 16, ../components/user/user.sass */
+    .profile_description h3 {
+      font-size: 46px;
+      text-align: center; }
+    /* line 19, ../components/user/user.sass */
+    .profile_description p {
+      font-size: 24px;
+      text-align: center; }
+    /* line 22, ../components/user/user.sass */
+    .profile_description button {
+      padding: 5px 50px;
+      margin: 0 auto; }
+
+/* line 1, ../elements/buttons/buttonGreen.sass */
+.greenButton {
+  background-color: #80b64b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  display: block; }
+
+/* line 15, ../sass/index.sass */
 body {
   color: #fff;
   font-family: "Roboto", sans-serif;
   background-color: #333; }
 
-/* line 18, ../sass/index.sass */
+/* line 20, ../sass/index.sass */
 .container {
   max-width: 1400px;
   margin: 0 auto; }

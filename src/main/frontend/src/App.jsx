@@ -1,4 +1,4 @@
-// App.js
+// App.jsx
 
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -19,9 +19,9 @@ class App extends React.Component {
                     <Routes>
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/blogs" element={<Blogs/>} />
-                        <Route path="/authors" element={<Authors/>} />
+                        <Route path="/authors/*" element={<Authors/>} />
                         <Route path="/profile" element={<SignIn/>} />
-                        <Route path="/user" render={({ location }) => <User location={location} />} />
+                        <Route path="/user" element={<User/>} />
                     </Routes>
                 </div>
             </Router>

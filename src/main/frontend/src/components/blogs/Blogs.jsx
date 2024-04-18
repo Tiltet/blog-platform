@@ -1,4 +1,4 @@
-// Blogs.js
+// Blogs.jsx
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -33,14 +33,6 @@ const BlogProfiles = () => {
 }
 
 class Blogs extends React.Component {
-    constructor(props) {
-        super(props)
-
-        axios.get(baseUrl).then((res) => {
-            console.log(res.data)
-        })
-    }
-
     render() {
         return (
             <div className="container">

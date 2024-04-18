@@ -1,8 +1,9 @@
-// Authors.js
+// Authors.jsx
 
 import React, {useEffect, useState} from "react"
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Button from "../../elements/buttons/Button";
 
 const baseUrl = "http://localhost:8080/api/v1/getAuthors"
 
@@ -12,8 +13,8 @@ const UserProfiles = () => {
 
     const fetchUserProfiles = () => {
         axios.get(baseUrl).then(res => {
-            console.log(res);
             setUserProfiles(res.data);
+            console.log(res.data);
         });
     };
 
@@ -27,13 +28,8 @@ const UserProfiles = () => {
                 <img src={userProfile.avatar} alt=""/>
                 <h1>{userProfile.username}</h1>
                 <p>{userProfile.email}</p>
-                <Link
-                    to={{
-                        pathname: "/user",
-                        state: { userProfile: userProfile },
-                    }}
-                >
-                    <button>Профиль</button>
+                <Link to={`/user?id=${userProfile.id}`}>
+                    <Button title={'Профиль'} />
                 </Link>
             </div>
         );
@@ -41,21 +37,13 @@ const UserProfiles = () => {
 }
 
 class Authors extends React.Component {
-    constructor(props) {
-        super(props)
-
-        axios.get(baseUrl).then((res) => {
-            console.log(res.data)
-        })
-    }
-
     render() {
         return (
-            <div className="container">
-                <div className="authors">
-                    <UserProfiles />
+                <div className="container">
+                    <div className="authors">
+                        <UserProfiles/>
+                    </div>
                 </div>
-            </div>
         );
     }
 }
