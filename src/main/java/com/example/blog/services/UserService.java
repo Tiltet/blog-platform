@@ -4,6 +4,7 @@ import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
 import com.example.blog.repositories.BlogRepository;
 import com.example.blog.repositories.UserRepository;
+import com.example.blog.security.UserDetailsImpl;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,9 @@ import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /** JavaDoc COMMENT. */
@@ -20,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Setter
 @AllArgsConstructor
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
@@ -111,5 +115,12 @@ public class UserService {
 
     public List<User> getAuthor() {
         return userRepository.findAllAuthors();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(
+                String.format("User '%s' not found",username)));
+        return UserDetailsImpl.build(user);
     }
 }

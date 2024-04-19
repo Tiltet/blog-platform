@@ -130,7 +130,7 @@
 
 /* line 3, ../components/blogs/blogs.sass */
 .blogs {
-  padding-top: 20px;
+  padding-top: 130px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap; }
@@ -157,7 +157,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px; }
+  padding-top: 150px; }
   /* line 9, ../components/signin/signin.sass */
   .block_signin form {
     padding: 40px;
