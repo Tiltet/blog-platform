@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User addUser(User userEntity) {
-        if (userRepository.findByUsername(userEntity.getUsername()) != null) {
+        if (userRepository.findByUsername(userEntity.getUsername()).isPresent()) {
             throw new IllegalArgumentException(USER_ALREADY_EXIST);
         }
         userRepository.save(userEntity);

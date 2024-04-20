@@ -47,16 +47,14 @@ public class SecurityController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody User signUpRequest) {
+    public String signup(@RequestBody User user) {
 
-        if (userRepository.findByUsername(signUpRequest.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             return "signupError";
         }
-        User user = new User();
-        user.setUsername(signUpRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return signUpRequest.getUsername() + " " + signUpRequest.getPassword();
+        return "User has registered";
     }
 
     @PostMapping("/signin")

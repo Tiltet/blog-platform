@@ -91,20 +91,20 @@
   /* line 80, ../components/header/header.sass */
   .burger {
     display: block; } }
-/* line 3, ../components/authors/authors.sass */
+/* line 3, ../pages/authors/authors.sass */
 .authors {
   padding-top: 110px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap; }
-  /* line 8, ../components/authors/authors.sass */
+  /* line 8, ../pages/authors/authors.sass */
   .authors .author {
     min-height: 450px;
     border-radius: 25px;
     flex: 0 1 22%;
     margin: 20px 10px 0 10px;
     background-color: #202124; }
-    /* line 14, ../components/authors/authors.sass */
+    /* line 14, ../pages/authors/authors.sass */
     .authors .author img {
       border: 5px solid #000;
       margin: 0 auto;
@@ -113,52 +113,52 @@
       width: 300px;
       height: 300px;
       border-radius: 25px; }
-    /* line 22, ../components/authors/authors.sass */
+    /* line 22, ../pages/authors/authors.sass */
     .authors .author h1 {
       padding-top: 20px;
       text-align: center;
       font-size: 36px; }
-    /* line 26, ../components/authors/authors.sass */
+    /* line 26, ../pages/authors/authors.sass */
     .authors .author p {
       text-align: center;
       font-size: 24px; }
-    /* line 29, ../components/authors/authors.sass */
+    /* line 29, ../pages/authors/authors.sass */
     .authors .author button {
       width: 220px;
       margin: 10px auto;
       padding: 5px 10px; }
 
-/* line 3, ../components/blogs/blogs.sass */
+/* line 3, ../pages/blogs/blogs.sass */
 .blogs {
   padding-top: 130px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap; }
-  /* line 8, ../components/blogs/blogs.sass */
+  /* line 8, ../pages/blogs/blogs.sass */
   .blogs .blog {
     border-radius: 25px;
     flex: 0 1 22%;
     margin: 10px;
     background-color: #202124; }
-    /* line 13, ../components/blogs/blogs.sass */
+    /* line 13, ../pages/blogs/blogs.sass */
     .blogs .blog img {
       border-radius: 25px;
       border: 5px solid #000;
       margin: 0 auto;
       min-height: 300px;
       min-width: 300px; }
-    /* line 19, ../components/blogs/blogs.sass */
+    /* line 19, ../pages/blogs/blogs.sass */
     .blogs .blog h1 {
       margin: 10px 0;
       text-align: center; }
 
-/* line 3, ../components/signin/signin.sass */
+/* line 3, ../pages/signin/signin.sass */
 .block_signin {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 150px; }
-  /* line 9, ../components/signin/signin.sass */
+  /* line 9, ../pages/signin/signin.sass */
   .block_signin form {
     padding: 40px;
     display: flex;
@@ -166,16 +166,16 @@
     width: 40%;
     background-color: #202124;
     border-radius: 20px; }
-  /* line 17, ../components/signin/signin.sass */
+  /* line 17, ../pages/signin/signin.sass */
   .block_signin .form_group {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px; }
-    /* line 22, ../components/signin/signin.sass */
+    /* line 22, ../pages/signin/signin.sass */
     .block_signin .form_group label {
       font-size: 36px;
       margin-bottom: 5px; }
-    /* line 26, ../components/signin/signin.sass */
+    /* line 26, ../pages/signin/signin.sass */
     .block_signin .form_group input[type="text"],
     .block_signin .form_group input[type="password"] {
       width: 100%;
@@ -183,7 +183,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 24px; }
-  /* line 34, ../components/signin/signin.sass */
+  /* line 34, ../pages/signin/signin.sass */
   .block_signin .signIn_button {
     margin-top: 50px;
     margin-bottom: 30px;
@@ -194,7 +194,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 36px; }
-  /* line 45, ../components/signin/signin.sass */
+  /* line 45, ../pages/signin/signin.sass */
   .block_signin .signUp_button {
     margin-top: 30px;
     padding: 10px 20px;
@@ -204,19 +204,23 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 36px; }
-  /* line 55, ../components/signin/signin.sass */
+  /* line 55, ../pages/signin/signin.sass */
   .block_signin .form_separator {
     display: flex;
     align-items: center; }
-    /* line 58, ../components/signin/signin.sass */
+    /* line 58, ../pages/signin/signin.sass */
     .block_signin .form_separator .horizontal-line {
       flex-grow: 1;
       height: 1px;
       background-color: white; }
-    /* line 62, ../components/signin/signin.sass */
+    /* line 62, ../pages/signin/signin.sass */
     .block_signin .form_separator .content {
       font-size: 36px;
       padding: 0 10px; }
+
+/* line 1, ../pages/signup/signup.sass */
+.signup {
+  padding-top: 120px; }
 
 /* line 1, ../components/user/user.sass */
 .profile {
@@ -259,13 +263,13 @@
   font-size: 18px;
   display: block; }
 
-/* line 15, ../sass/index.sass */
+/* line 16, ../sass/index.sass */
 body {
   color: #fff;
   font-family: "Roboto", sans-serif;
   background-color: #333; }
 
-/* line 20, ../sass/index.sass */
+/* line 21, ../sass/index.sass */
 .container {
   max-width: 1400px;
   margin: 0 auto; }
