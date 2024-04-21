@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Button from "../../elements/buttons/Button";
 
 const baseUrl = "http://localhost:8080/auth/signup";
 
@@ -14,6 +15,7 @@ const SignUp = () => {
         const data = {
             username: formData.get("username"),
             password: formData.get("password"),
+            email: formData.get("email"),
         };
 
         axios
@@ -30,7 +32,7 @@ const SignUp = () => {
     return (
         <div className="container">
             <div className="signup">
-                <div>Регистрация</div>
+                <h2>Регистрация</h2>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
@@ -44,7 +46,13 @@ const SignUp = () => {
                         placeholder="Password"
                         autoComplete="current-password"
                     />
-                    <button type="submit">Зарегистрироваться</button>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                    />
+                    <Button title={"Зарегистрироваться"} className={"signup_button"}/>
                 </form>
             </div>
         </div>

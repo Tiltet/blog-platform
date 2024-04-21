@@ -2,10 +2,10 @@
 
 import React from "react"
 
-const Button = ( {title} ) =>  {
+const Button = ( {title, className} ) =>  {
 
     return (
-        <button className="greenButton">
+        <button className={`greenButton ${className}`}>
             <p>{title}</p>
         </button>
     );

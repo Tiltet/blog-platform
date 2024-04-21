@@ -3,8 +3,11 @@
 import React from "react"
 import {Link, useNavigate} from "react-router-dom"
 import axios from "axios";
+import Button from "../../elements/buttons/Button";
+import Cookies from 'js-cookie';
 
 const baseUrl = "http://localhost:8080/auth/signin";
+const getUser = "http://localhost:8080/api/v1/security/profile";
 
 const SignIn = () => {
 
@@ -17,6 +20,8 @@ const SignIn = () => {
         const data = {
             username: formData.get("username"),
             password: formData.get("password"),
+            email: formData.get("email"),
+            avatar: formData.get("avatar"),
         };
 
         console.log(data.username);
@@ -27,9 +32,23 @@ const SignIn = () => {
             .then((response) => {
                 const token = response.data;
                 localStorage.setItem('token', token);
-                console.log(localStorage.getItem('token'));
-                navigate("/home");
-                window.location.reload();
+                axios
+                    .get(getUser, {
+                    params: {
+                        username: data.username
+                    },
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                .then((response) => {
+                        Cookies.set('token', token);
+                        Cookies.set('username', response.data.username);
+                        Cookies.set('email', response.data.email);
+                        Cookies.set('avatar', response.data.avatar);
+                        navigate("/profile");
+                        window.location.reload();
+                    })
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -38,10 +57,10 @@ const SignIn = () => {
 
     return (
         <div className="container">
-            <div className="block_signin">
-                <form className="form_signin" onSubmit={handleSubmit}>
-                    <div className="form_group">
-                        <label htmlFor="username">Логин:</label>
+            <div className="block">
+                <div className="block_signin">
+                    <h2>Вход</h2>
+                    <form className="form_signin" onSubmit={handleSubmit}>
                         <input
                             type="text"
                             id="username"
@@ -50,9 +69,6 @@ const SignIn = () => {
                             autoComplete="username"
                             required
                         />
-                    </div>
-                    <div className="form_group">
-                        <label htmlFor="password">Пароль:</label>
                         <input
                             type="password"
                             id="password"
@@ -61,19 +77,20 @@ const SignIn = () => {
                             autoComplete="password"
                             required
                         />
+                        <Button title={'Войти'} className={'signIn_button'}/>
+                        <div className="form_separator">
+                            <div className="horizontal-line"></div>
+                            <div className="content">or</div>
+                            <div className="horizontal-line"></div>
+                        </div>
+                    </form>
+                    <div className="form_footer">
+                        <p>Нет аккаунта?</p>
+                        <Link to={"/signup"}>
+                            Регистрация
+                        </Link>
                     </div>
-                    <button className="signIn_button" type="submit">
-                        Войти
-                    </button>
-                    <div className="form_separator">
-                        <div className="horizontal-line"></div>
-                        <div className="content">or</div>
-                        <div className="horizontal-line"></div>
-                    </div>
-                    <button className="signUp_button" type="submit">
-                        <Link to={"/signup"}>Регистрация</Link>
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     );

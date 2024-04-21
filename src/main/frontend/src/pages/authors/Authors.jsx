@@ -12,7 +12,9 @@ const UserProfiles = () => {
     const [userProfiles, setUserProfiles] = useState([]);
 
     const fetchUserProfiles = () => {
-        axios.get(baseUrl).then(res => {
+        axios
+            .get(baseUrl)
+            .then(res => {
             setUserProfiles(res.data);
             console.log(res.data);
         });

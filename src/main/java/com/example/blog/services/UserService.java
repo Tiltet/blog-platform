@@ -1,5 +1,6 @@
 package com.example.blog.services;
 
+import com.example.blog.component.RequestCounter;
 import com.example.blog.entities.Blog;
 import com.example.blog.entities.User;
 import com.example.blog.repositories.BlogRepository;
@@ -27,13 +28,17 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
+    private final RequestCounter requestCounter;
+
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
+
     private static final String USER_NOT_FOUND = "User not found";
     private static final String BLOG_NOT_FOUND = "Blog not found";
     private static final String USER_ALREADY_EXIST = "User already exist";
     private static final String BLOG_ALREADY_EXIST = "Blog already exist";
 
     public List<User> getUsers() {
+        requestCounter.increment();
         return userRepository.findAll();
     }
 
@@ -115,6 +120,10 @@ public class UserService implements UserDetailsService {
 
     public List<User> getAuthor() {
         return userRepository.findAllAuthors();
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     @Override

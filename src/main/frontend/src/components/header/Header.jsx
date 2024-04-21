@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
+import Cookies from "js-cookie";
 
 class Header extends React.Component {
 
@@ -9,14 +10,7 @@ class Header extends React.Component {
       super(props)
       this.state = {
          isBurgerOpen: false,
-         isTokenPresent: false,
-      }
-   }
-
-   componentDidMount() {
-      const token = localStorage.getItem('token');
-      if (token) {
-         this.setState({ isTokenPresent: true });
+         isTokenPresent: Cookies.get('token') ? true : false
       }
    }
 
@@ -34,19 +28,14 @@ class Header extends React.Component {
       }
    }
 
-   printToken = () => {
-      console.log(localStorage.getItem("token"));
-   }
-
    logout = () => {
-      localStorage.removeItem("token")
-      window.location.reload();
+      Cookies.remove('token')
+      Cookies.remove('username')
+      Cookies.remove('email')
+      this.setState({ isTokenPresent: false })
    }
 
    render() {
-
-      const { isTokenPresent } = this.state;
-
       return (
           <header className="header">
              <div className="container">
@@ -63,25 +52,20 @@ class Header extends React.Component {
                          <li>
                             <Link to={"/authors"}>Авторы</Link>
                          </li>
-                         {
-                            isTokenPresent === false ?
+                         {this.state.isTokenPresent ? (
+                             <React.Fragment>
                                 <li>
-                                   <Link to={"/signin"}>Войти</Link>
+                                   <Link to="/profile">Профиль</Link>
                                 </li>
-                            : false
-                         }
-                         {
-                            isTokenPresent ? (
-                                <React.Fragment>
-                                   <li>
-                                      <Link to={"/profile"} onClick={this.printToken}>Профиль</Link>
-                                   </li>
-                                   <li>
-                                      <Link to={"/home"} onClick={this.logout}>Выйти</Link>
-                                   </li>
-                                </React.Fragment>
-                            ) : false
-                         }
+                                <li>
+                                   <Link to="/home" onClick={this.logout}>Выйти</Link>
+                                </li>
+                             </React.Fragment>
+                         ) : (
+                             <li>
+                                <Link to="/signin">Войти</Link>
+                             </li>
+                         )}
                       </ul>
                       <div className="burger" onClick={this.toggleBurger}>
                          <span className="burger__line"></span>
