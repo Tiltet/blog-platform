@@ -62,6 +62,13 @@ public class UserController {
         return userService.unsubscribe(userId, blogId);
     }
 
+
+
+    @GetMapping("/security/profile")
+    public User getUser(@RequestParam String username) {
+        return userService.findByUsername(username);
+    }
+
     // Кастомный вопрос получения всех Authors
     @GetMapping("/getAuthors")
     public List<User> getAuthor() {

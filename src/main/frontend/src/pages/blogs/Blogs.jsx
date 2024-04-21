@@ -25,7 +25,7 @@ const BlogProfiles = () => {
         return (
             <div className="blog" key={index}>
                 <img src={blogProfile.img} alt=""/>
-                <h1>{blogProfile.title}</h1>
+                <h2>{blogProfile.title}</h2>
                 {/*<p>{blogProfile.description}</p>*/}
             </div>
         );

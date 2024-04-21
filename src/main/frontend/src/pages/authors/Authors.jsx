@@ -12,7 +12,9 @@ const UserProfiles = () => {
     const [userProfiles, setUserProfiles] = useState([]);
 
     const fetchUserProfiles = () => {
-        axios.get(baseUrl).then(res => {
+        axios
+            .get(baseUrl)
+            .then(res => {
             setUserProfiles(res.data);
             console.log(res.data);
         });
@@ -26,7 +28,7 @@ const UserProfiles = () => {
         return (
             <div className="author" key={index}>
                 <img src={userProfile.avatar} alt=""/>
-                <h1>{userProfile.username}</h1>
+                <h2>{userProfile.username}</h2>
                 <p>{userProfile.email}</p>
                 <Link to={`/user?id=${userProfile.id}`}>
                     <Button title={'Профиль'} />

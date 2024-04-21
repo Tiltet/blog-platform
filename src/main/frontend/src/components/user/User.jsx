@@ -26,10 +26,10 @@ const User = () => {
         <div className="container">
             <div>
                 <div className="container">
-                    <div className="profile">
+                    <div className="user">
                         <img src={user.avatar} alt=""/>
-                        <div className="profile_description">
-                            <div className="profile_description_text">
+                        <div className="user_description">
+                            <div className="user_description_text">
                                 <h3>{user.id} </h3>
                                 <p>{user.username} </p>
                                 <p>{user.email} </p>

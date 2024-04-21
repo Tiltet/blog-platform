@@ -2,78 +2,313 @@
 /* line 2, ../pages/home/homePage.sass */
 .homePage h2 {
   padding: 200px 0 0 0;
-  font-size: 186px;
+  font-size: 86px;
   text-align: center; }
+
+/* line 3, ../pages/authors/authors.sass */
+.authors {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  /* line 8, ../pages/authors/authors.sass */
+  .authors .author {
+    min-height: 420px;
+    border-radius: 25px;
+    flex: 0 1 22%;
+    margin: 10px;
+    background-color: #202124; }
+    /* line 14, ../pages/authors/authors.sass */
+    .authors .author img {
+      margin: 0 auto;
+      border-radius: 25px;
+      border: 5px solid #000;
+      min-height: 200px;
+      min-width: 200px; }
+    /* line 20, ../pages/authors/authors.sass */
+    .authors .author h2 {
+      padding-top: 20px;
+      text-align: center;
+      font-size: 24px; }
+    /* line 24, ../pages/authors/authors.sass */
+    .authors .author p {
+      text-align: center;
+      font-size: 18px; }
+    /* line 27, ../pages/authors/authors.sass */
+    .authors .author button {
+      width: 220px;
+      margin: 10px auto;
+      padding: 5px 10px; }
+
+/* line 3, ../pages/blogs/blogs.sass */
+.blogs {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; }
+  /* line 8, ../pages/blogs/blogs.sass */
+  .blogs .blog {
+    border-radius: 25px;
+    flex: 0 1 20%;
+    margin: 10px;
+    background-color: #202124; }
+    /* line 13, ../pages/blogs/blogs.sass */
+    .blogs .blog img {
+      margin: 0 auto;
+      border-radius: 25px;
+      border: 5px solid #000;
+      min-height: 200px;
+      min-width: 200px; }
+    /* line 19, ../pages/blogs/blogs.sass */
+    .blogs .blog h2 {
+      font-size: 24px;
+      margin: 10px 0;
+      text-align: center; }
+
+/* line 3, ../pages/signin/signin.sass */
+.block {
+  padding: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  /* line 9, ../pages/signin/signin.sass */
+  .block .block_signin {
+    width: 400px;
+    background-color: #202124;
+    border-radius: 15px;
+    padding: 20px 30px 30px 30px; }
+    /* line 14, ../pages/signin/signin.sass */
+    .block .block_signin h2 {
+      font-size: 42px;
+      text-align: left;
+      padding-bottom: 20px; }
+    /* line 18, ../pages/signin/signin.sass */
+    .block .block_signin .form_signin {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto; }
+      /* line 22, ../pages/signin/signin.sass */
+      .block .block_signin .form_signin input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%; }
+      /* line 28, ../pages/signin/signin.sass */
+      .block .block_signin .form_signin .signIn_button {
+        margin-top: 40px;
+        font-size: 18px; }
+    /* line 31, ../pages/signin/signin.sass */
+    .block .block_signin .signin_footer {
+      font-size: 18px;
+      margin-top: 15px;
+      display: flex; }
+      /* line 35, ../pages/signin/signin.sass */
+      .block .block_signin .signin_footer a {
+        margin-left: 7px; }
+
+@media (max-width: 767px) {
+  /* line 42, ../pages/signin/signin.sass */
+  .block .block_signin {
+    width: 280px; }
+    /* line 44, ../pages/signin/signin.sass */
+    .block .block_signin h2 {
+      font-size: 36px; }
+    /* line 46, ../pages/signin/signin.sass */
+    .block .block_signin .signin_footer {
+      font-size: 16px; }
+      /* line 48, ../pages/signin/signin.sass */
+      .block .block_signin .signin_footer a {
+        margin-left: 7px; } }
+/* line 1, ../pages/signup/signup.sass */
+.signup_block {
+  padding: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  /* line 7, ../pages/signup/signup.sass */
+  .signup_block .signup_form {
+    width: 400px;
+    margin: 0 20px;
+    padding: 20px 30px 30px 30px;
+    background-color: #202124;
+    border-radius: 15px; }
+    /* line 13, ../pages/signup/signup.sass */
+    .signup_block .signup_form h2 {
+      font-size: 42px;
+      text-align: left;
+      padding-bottom: 20px; }
+    /* line 17, ../pages/signup/signup.sass */
+    .signup_block .signup_form form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto; }
+      /* line 21, ../pages/signup/signup.sass */
+      .signup_block .signup_form form input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%; }
+      /* line 27, ../pages/signup/signup.sass */
+      .signup_block .signup_form form .signup_button {
+        margin-top: 40px;
+        font-size: 18px; }
+    /* line 30, ../pages/signup/signup.sass */
+    .signup_block .signup_form .signup_footer {
+      font-size: 18px;
+      margin-top: 15px;
+      display: flex; }
+      /* line 34, ../pages/signup/signup.sass */
+      .signup_block .signup_form .signup_footer a {
+        margin-left: 7px; }
+
+@media (max-width: 767px) {
+  /* line 41, ../pages/signup/signup.sass */
+  .signup_block .signup_form {
+    width: 280px; }
+    /* line 43, ../pages/signup/signup.sass */
+    .signup_block .signup_form h2 {
+      font-size: 36px; }
+    /* line 45, ../pages/signup/signup.sass */
+    .signup_block .signup_form .signun_footer {
+      font-size: 16px; }
+      /* line 47, ../pages/signup/signup.sass */
+      .signup_block .signup_form .signun_footer a {
+        margin-left: 7px; } }
+/* line 1, ../pages/profile/profile.sass */
+.profile {
+  padding: 40px; }
+  /* line 3, ../pages/profile/profile.sass */
+  .profile img {
+    display: block;
+    border-radius: 25px;
+    width: 300px;
+    height: 300px; }
+  /* line 8, ../pages/profile/profile.sass */
+  .profile_block {
+    display: flex;
+    justify-content: center; }
+    /* line 11, ../pages/profile/profile.sass */
+    .profile_block img {
+      margin-right: 30px; }
+
+/* line 1, ../pages/addBlog/addBlog.sass */
+.addBlog {
+  padding: 50px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  /* line 7, ../pages/addBlog/addBlog.sass */
+  .addBlog_block {
+    width: 400px;
+    margin: 0 20px;
+    padding: 20px 30px 30px 30px;
+    background-color: #202124;
+    border-radius: 15px; }
+    /* line 13, ../pages/addBlog/addBlog.sass */
+    .addBlog_block h2 {
+      font-size: 42px;
+      text-align: left;
+      padding-bottom: 20px; }
+    /* line 17, ../pages/addBlog/addBlog.sass */
+    .addBlog_block form {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto; }
+      /* line 21, ../pages/addBlog/addBlog.sass */
+      .addBlog_block form input {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%; }
+      /* line 27, ../pages/addBlog/addBlog.sass */
+      .addBlog_block form button {
+        margin-top: 40px; }
 
 /* line 6, ../components/header/header.sass */
 .header {
-  position: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 999;
   width: 100%;
   padding: 20px;
   background-color: #202124; }
-  /* line 11, ../components/header/header.sass */
+  /* line 13, ../components/header/header.sass */
   .header_nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center; }
-    /* line 16, ../components/header/header.sass */
-    .header_nav h1 {
-      font-size: 48px; }
     /* line 18, ../components/header/header.sass */
+    .header_nav h1 {
+      font-size: 36px; }
+    /* line 20, ../components/header/header.sass */
     .header_nav_menu {
       display: flex;
       justify-content: end;
-      list-style-type: none; }
-      /* line 22, ../components/header/header.sass */
+      list-style-type: none;
+      transition: 0.5s; }
+      /* line 25, ../components/header/header.sass */
       .header_nav_menu li {
-        font-size: 24px;
-        padding: 0 20px; }
-    /* line 25, ../components/header/header.sass */
+        font-size: 18px;
+        padding: 0 20px;
+        border-radius: 5px; }
+    /* line 29, ../components/header/header.sass */
     .header_nav_menu.active {
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(30px);
-      overflow: hidden;
-      transform: translateY(0);
-      transition: transform 0.5s ease; }
-      /* line 33, ../components/header/header.sass */
+      background-color: #202124;
+      transform: translateY(0); }
+      /* line 35, ../components/header/header.sass */
       .header_nav_menu.active li {
-        padding-top: 50px; }
-        /* line 35, ../components/header/header.sass */
-        .header_nav_menu.active li a {
-          font-size: 24px;
-          color: white; }
+        padding-top: 80px; }
 
-/* line 40, ../components/header/header.sass */
+/* line 38, ../components/header/header.sass */
 .burger {
-  position: absolute;
-  top: 35px;
-  right: 20px;
-  z-index: 2;
   display: none; }
-  /* line 46, ../components/header/header.sass */
-  .burger span {
+  /* line 40, ../components/header/header.sass */
+  .burger .burger_line {
     display: block;
     width: 30px;
     height: 3px;
     background-color: white;
-    margin-bottom: 5px; }
+    margin-bottom: 5px;
+    transition: 0.5s; }
+  /* line 48, ../components/header/header.sass */
+  .burger .active:first-child {
+    width: 40px;
+    transform: translateY(8px) rotate(45deg); }
+  /* line 51, ../components/header/header.sass */
+  .burger .active:nth-child(2) {
+    transition: 0s;
+    opacity: 0; }
+  /* line 54, ../components/header/header.sass */
+  .burger .active:last-child {
+    width: 40px;
+    transform: translateY(-8px) rotate(-45deg); }
 
 @media (max-width: 1024px) {
-  /* line 56, ../components/header/header.sass */
+  /* line 62, ../components/header/header.sass */
   .header_nav h1 {
     font-size: 36px; }
-  /* line 59, ../components/header/header.sass */
-  .header_nav ul li {
-    padding: 0 15px;
-    font-size: 18px; } }
+  /* line 64, ../components/header/header.sass */
+  .header_nav ul {
+    width: 100%;
+    height: 100%; }
+    /* line 67, ../components/header/header.sass */
+    .header_nav ul li {
+      padding: 0 15px; }
+      /* line 69, ../components/header/header.sass */
+      .header_nav ul li a {
+        font-size: 16px; } }
 @media (max-width: 767px) {
-  /* line 66, ../components/header/header.sass */
+  /* line 75, ../components/header/header.sass */
   .header_nav h1 {
-    font-size: 36px; }
-  /* line 68, ../components/header/header.sass */
+    font-size: 26px; }
+  /* line 77, ../components/header/header.sass */
   .header_nav ul {
     position: fixed;
     top: 0;
@@ -83,189 +318,64 @@
     justify-content: start;
     align-items: center;
     transform: translateY(-100%); }
-    /* line 77, ../components/header/header.sass */
-    .header_nav ul li {
-      padding: 0 10px;
-      font-size: 14px; }
+    /* line 87, ../components/header/header.sass */
+    .header_nav ul li a {
+      font-size: 24px; }
 
-  /* line 80, ../components/header/header.sass */
+  /* line 89, ../components/header/header.sass */
   .burger {
+    position: static;
     display: block; } }
-/* line 3, ../components/authors/authors.sass */
-.authors {
-  padding-top: 110px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; }
-  /* line 8, ../components/authors/authors.sass */
-  .authors .author {
-    min-height: 450px;
-    border-radius: 25px;
-    flex: 0 1 22%;
-    margin: 20px 10px 0 10px;
-    background-color: #202124; }
-    /* line 14, ../components/authors/authors.sass */
-    .authors .author img {
-      border: 5px solid #000;
-      margin: 0 auto;
-      min-width: 300px;
-      min-height: 300px;
-      width: 300px;
-      height: 300px;
-      border-radius: 25px; }
-    /* line 22, ../components/authors/authors.sass */
-    .authors .author h1 {
-      padding-top: 20px;
-      text-align: center;
-      font-size: 36px; }
-    /* line 26, ../components/authors/authors.sass */
-    .authors .author p {
-      text-align: center;
-      font-size: 24px; }
-    /* line 29, ../components/authors/authors.sass */
-    .authors .author button {
-      width: 220px;
-      margin: 10px auto;
-      padding: 5px 10px; }
-
-/* line 3, ../components/blogs/blogs.sass */
-.blogs {
-  padding-top: 20px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; }
-  /* line 8, ../components/blogs/blogs.sass */
-  .blogs .blog {
-    border-radius: 25px;
-    flex: 0 1 22%;
-    margin: 10px;
-    background-color: #202124; }
-    /* line 13, ../components/blogs/blogs.sass */
-    .blogs .blog img {
-      border-radius: 25px;
-      border: 5px solid #000;
-      margin: 0 auto;
-      min-height: 300px;
-      min-width: 300px; }
-    /* line 19, ../components/blogs/blogs.sass */
-    .blogs .blog h1 {
-      margin: 10px 0;
-      text-align: center; }
-
-/* line 3, ../components/signin/signin.sass */
-.block_signin {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px; }
-  /* line 9, ../components/signin/signin.sass */
-  .block_signin form {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    background-color: #202124;
-    border-radius: 20px; }
-  /* line 17, ../components/signin/signin.sass */
-  .block_signin .form_group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px; }
-    /* line 22, ../components/signin/signin.sass */
-    .block_signin .form_group label {
-      font-size: 36px;
-      margin-bottom: 5px; }
-    /* line 26, ../components/signin/signin.sass */
-    .block_signin .form_group input[type="text"],
-    .block_signin .form_group input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 24px; }
-  /* line 34, ../components/signin/signin.sass */
-  .block_signin .signIn_button {
-    margin-top: 50px;
-    margin-bottom: 30px;
-    padding: 10px 20px;
-    background-color: #80b64b;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 36px; }
-  /* line 45, ../components/signin/signin.sass */
-  .block_signin .signUp_button {
-    margin-top: 30px;
-    padding: 10px 20px;
-    background-color: #80b64b;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 36px; }
-  /* line 55, ../components/signin/signin.sass */
-  .block_signin .form_separator {
-    display: flex;
-    align-items: center; }
-    /* line 58, ../components/signin/signin.sass */
-    .block_signin .form_separator .horizontal-line {
-      flex-grow: 1;
-      height: 1px;
-      background-color: white; }
-    /* line 62, ../components/signin/signin.sass */
-    .block_signin .form_separator .content {
-      font-size: 36px;
-      padding: 0 10px; }
-
 /* line 1, ../components/user/user.sass */
-.profile {
-  margin-top: 50px;
+.user {
+  padding-top: 40px;
   display: flex;
   justify-content: center; }
   /* line 5, ../components/user/user.sass */
-  .profile img {
+  .user img {
     display: block;
     border-radius: 25px;
     border: 2px solid #000;
     width: 500px;
     height: 500px; }
   /* line 11, ../components/user/user.sass */
-  .profile_description {
+  .user_description {
     padding: 0 0 0 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between; }
     /* line 16, ../components/user/user.sass */
-    .profile_description h3 {
+    .user_description h3 {
       font-size: 46px;
       text-align: center; }
     /* line 19, ../components/user/user.sass */
-    .profile_description p {
+    .user_description p {
       font-size: 24px;
       text-align: center; }
     /* line 22, ../components/user/user.sass */
-    .profile_description button {
+    .user_description button {
       padding: 5px 50px;
       margin: 0 auto; }
 
 /* line 1, ../elements/buttons/buttonGreen.sass */
 .greenButton {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
   background-color: #80b64b;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
-  display: block; }
+  font-size: 18px; }
 
-/* line 15, ../sass/index.sass */
+/* line 18, ../sass/index.sass */
 body {
   color: #fff;
   font-family: "Roboto", sans-serif;
   background-color: #333; }
 
-/* line 20, ../sass/index.sass */
+/* line 23, ../sass/index.sass */
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto; }
