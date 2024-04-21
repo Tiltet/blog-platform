@@ -10,6 +10,7 @@ import Authors from "./pages/authors/Authors";
 import User from "./components/user/User";
 import SignUp from "./pages/signup/SignUp";
 import Profile from "./pages/profile/Profile";
+import AddBlog from "./pages/addBlog/AddBlog";
 
 
 class App extends React.Component {
@@ -27,6 +28,7 @@ class App extends React.Component {
                         <Route path="/signup" element={<SignUp/>} />
                         <Route path="/user" element={<User/>} />
                         <Route path="/profile" element={<Profile/>} />
+                        <Route path="/profile/addBlog" element={<AddBlog/>} />
                     </Routes>
                 </div>
             </Router>

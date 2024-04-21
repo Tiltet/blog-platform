@@ -1,15 +1,48 @@
-.signup
+.signup_block
+  padding: 50px 0 0 0
   display: flex
   flex-direction: column
-  width: 300px
-  margin: 40px auto 0 auto
-  background-color: $header-color
-  border-radius: 20px
-  padding: 20px
-  h2
-    text-align: center
-  form
-    display: flex
-    flex-direction: column
-  &_button
-    margin-top: 50px
+  align-items: center
+  justify-content: center
+  .signup_form
+    width: 400px
+    margin: 0 20px
+    padding: 20px 30px 30px 30px
+    background-color: $header-color
+    border-radius: 15px
+    h2
+      font-size: 42px
+      text-align: left
+      padding-bottom: 20px
+    form
+      display: flex
+      flex-direction: column
+      margin: 0 auto
+      input
+        margin-bottom: 10px
+        padding: 8px
+        border: 1px solid #ccc
+        border-radius: 4px
+        width: 100%
+      .signup_button
+        margin-top: 40px
+        font-size: 18px
+    .signup_footer
+      font-size: 18px
+      margin-top: 15px
+      display: flex
+      a
+        margin-left: 7px
+
+@include laptop
+
+@include table
+  .signup_block
+    .signup_form
+      width: 280px
+      h2
+        font-size: 36px
+      .signun_footer
+        font-size: 16px
+        a
+          margin-left: 7px

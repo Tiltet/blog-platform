@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
+import Button from "../../elements/buttons/Button";
 
 class Profile extends React.Component {
 
@@ -20,7 +21,7 @@ class Profile extends React.Component {
 
         if (this.avatar) {
             console.log(this.avatar)
-            this.avatar = "https://i.pinimg.com/236x/9e/8c/e1/9e8ce1ae6503ff0538f32d5bd7bd23b5.jpg"
+            this.avatar = "https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640528715_49-abrakadabra-fun-p-serii-chelovek-na-avu-56.jpg"
         }
     }
 
@@ -34,13 +35,15 @@ class Profile extends React.Component {
                     {
                         isTokenPresent ? (
                             <React.Fragment>
-                                <div className="profile">
+                                <div className="profile_block">
                                     <img src={this.avatar} alt="Avatar"/>
                                     <div className="profile_info">
-                                        <h2>Пользователь зарегистрирован</h2>
+                                        <h2>Профиль</h2>
                                         <p>Username: {Cookies.get('username')}</p>
                                         <p>Email: {Cookies.get('email')}</p>
-                                        <Link to={"/home"}>Главная страница</Link>
+                                        <Link to={"/profile/addBlog"}>
+                                            <Button title={'Добавить блог'} className={'profile_addBlog_button'} />
+                                        </Link>
                                     </div>
                                 </div>
                             </React.Fragment>

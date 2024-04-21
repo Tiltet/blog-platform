@@ -5,6 +5,8 @@
 
 .header
     position: sticky
+    top: 0
+    z-index: 999
     width: 100%
     padding: 20px
     background-color: $header-color
@@ -14,41 +16,45 @@
         justify-content: space-between
         align-items: center
         h1
-            font-size: 48px
+            font-size: 36px
         &_menu
             display: flex
             justify-content: end
-            list-style-type: none 
+            list-style-type: none
+            transition: 0.5s
             li
-                font-size: 24px
+                font-size: 18px
                 padding: 0 20px
+                border-radius: 5px
         &_menu.active
-            width: 100%
-            height: 100%
-            background-color: rgba(0, 0, 0, 0.8)
-            backdrop-filter: blur(30px)
-            overflow: hidden
+            background-color: $header-color
+            // opacity: 0.5
+            // backdrop-filter: blur(20px)
+            // overflow: hidden
             transform: translateY(0)
-            transition: transform 0.5s ease
             li
-                padding-top: 50px
-                a
-                    font-size: 24px
-                    color: white
-
+                padding-top: 80px
 
 .burger
-    position: absolute
-    top: 35px
-    right: 20px
-    z-index: 2
     display: none
-    span
+    .burger_line
         display: block
         width: 30px
         height: 3px
         background-color: white
         margin-bottom: 5px
+        transition: 0.5s
+
+    .active:first-child
+        width: 40px
+        transform: translateY(8px) rotate(45deg)
+    .active:nth-child(2)
+        transition: 0s
+        opacity: 0
+    .active:last-child
+        width: 40px
+        transform: translateY(-8px) rotate(-45deg)
+
 
 @include laptop
     .header
@@ -56,15 +62,18 @@
             h1
                 font-size: 36px
             ul
+                width: 100%
+                height: 100%
                 li
                     padding: 0 15px
-                    font-size: 18px
+                    a
+                        font-size: 16px
 
 @include table
     .header
         &_nav
             h1
-                font-size: 36px
+                font-size: 26px
             ul
                 position: fixed
                 top: 0
@@ -75,7 +84,8 @@
                 align-items: center
                 transform: translateY(-100%)
                 li
-                    padding: 0 10px
-                    font-size: 14px
+                    a
+                        font-size: 24px
     .burger
+        position: static
         display: block

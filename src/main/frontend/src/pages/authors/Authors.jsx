@@ -28,7 +28,7 @@ const UserProfiles = () => {
         return (
             <div className="author" key={index}>
                 <img src={userProfile.avatar} alt=""/>
-                <h1>{userProfile.username}</h1>
+                <h2>{userProfile.username}</h2>
                 <p>{userProfile.email}</p>
                 <Link to={`/user?id=${userProfile.id}`}>
                     <Button title={'Профиль'} />

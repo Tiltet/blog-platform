@@ -1,7 +1,7 @@
 // SignIn.jsx
 
 import React from "react"
-import {Link, useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import Button from "../../elements/buttons/Button";
 import Cookies from 'js-cookie';
@@ -43,6 +43,7 @@ const SignIn = () => {
                 })
                 .then((response) => {
                         Cookies.set('token', token);
+                        Cookies.set('id', response.data.id);
                         Cookies.set('username', response.data.username);
                         Cookies.set('email', response.data.email);
                         Cookies.set('avatar', response.data.avatar);
@@ -78,13 +79,8 @@ const SignIn = () => {
                             required
                         />
                         <Button title={'Войти'} className={'signIn_button'}/>
-                        <div className="form_separator">
-                            <div className="horizontal-line"></div>
-                            <div className="content">or</div>
-                            <div className="horizontal-line"></div>
-                        </div>
                     </form>
-                    <div className="form_footer">
+                    <div className="signin_footer">
                         <p>Нет аккаунта?</p>
                         <Link to={"/signup"}>
                             Регистрация
