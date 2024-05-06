@@ -1,11 +1,11 @@
 // Subheader
 
 .header
+    padding: 10px 0
     position: sticky
     top: 0
     z-index: 2
     width: 100%
-    padding: 20px 0
     background-color: $header-color
     &_nav
         nav
@@ -29,6 +29,8 @@
                 padding-top: 80px
 
 @include laptop
+    .header
+        padding: 15px 0
     .header_nav_menu_profile
         display: none
 

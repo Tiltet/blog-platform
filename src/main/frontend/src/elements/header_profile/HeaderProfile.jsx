@@ -27,18 +27,20 @@ class HeaderProfile extends React.Component {
             <ul className="header_profile">
                 <li>
                     <Link to="#">
-                        <img src="img/icons/icons8-поиск.svg" alt=""/>
+                        <img className="header_profile_icons" src="img/icons/icons8-поиск.svg" alt=""/>
                     </Link>
                 </li>
                 <li>
                     <Link to="#">
-                        <img src="img/icons/icons8-карандаш-32.svg" alt=""/>
+                        <img className="header_profile_icons" src="img/icons/icons8-карандаш-32.svg" alt=""/>
                     </Link>
                 </li>
                 {this.state.isTokenPresent ? (
                     <React.Fragment>
                         <li>
-                            <Link to="/profile" onClick={this.removeActive}>Профиль</Link>
+                            <Link onClick={this.removeActive} to="/">
+                                <img className="header_profile_avatar" src={Cookies.get('avatar')} alt=""/>
+                            </Link>
                         </li>
                         <li>
                             <Link to="/home" onClick={this.logout}>Выйти</Link>
@@ -46,9 +48,8 @@ class HeaderProfile extends React.Component {
                     </React.Fragment>
                 ) : (
                     <React.Fragment>
-                        <li>
-                            <Link className="header_profile_signin" to="/signin"
-                                  onClick={this.removeActive}>Войти</Link>
+                        <li className="header_profile_signin">
+                            <Link to="/signin" onClick={this.removeActive}>Войти</Link>
                         </li>
                     </React.Fragment>
                 )}
