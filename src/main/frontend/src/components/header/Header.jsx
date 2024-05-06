@@ -1,99 +1,111 @@
 // Header.jsx
 
 import React from "react"
-import { Link } from "react-router-dom"
-import Cookies from "js-cookie";
+import HeaderProfile from "../../elements/header_profile/HeaderProfile";
+import HeaderMenu from "../../elements/header_menu/HeaderMenu";
+import HeaderServices from "../../elements/header_services/HeaderServices";
 
 class Header extends React.Component {
 
    constructor(props) {
-      super(props)
-      this.state = {
-         isBurgerOpen: false,
-         isTokenPresent: !!Cookies.get('token')
+      super(props);
+      this.subheaderContainerRef = React.createRef();
+   }
+
+   handleClickOutside = (event) => {
+      if (
+          this.subheaderContainerRef.current &&
+          !this.subheaderContainerRef.current.contains(event.target)
+      ) {
+         const list = document.querySelector(".subheader_container_left_list");
+         const menu = document.querySelector(".subheader_container_menu");
+         list.classList.remove("active");
+         menu.classList.remove('active')
+         document.body.style.overflow = 'auto';
       }
    }
 
-   toggleBurger = () => {
-      const burger = document.querySelector('.burger')
-      const menu = document.querySelector('.header_nav_menu')
-      const lines = document.querySelectorAll('.burger_line')
+   componentDidMount() {
+      document.addEventListener("click", this.handleClickOutside);
+   }
+
+   componentWillUnmount() {
+      document.removeEventListener("click", this.handleClickOutside);
+   }
+
+
+   ButtonArrowClick = () => {
+      const list = document.querySelector(".subheader_container_left_list");
+      list.classList.toggle("active");
+   }
+
+   tooggleBurger = () => {
+      const menu = document.querySelector('.subheader_container_menu')
+      const lines = document.querySelectorAll('.subheader_burger_line')
 
       if (menu.classList.contains('active')) {
          menu.classList.remove('active')
          lines.forEach(line => {
             line.classList.remove('active')
          })
+         document.body.style.overflow = 'auto';
       }
       else {
          menu.classList.add('active')
          lines.forEach(line => {
             line.classList.add('active')
          })
+         document.body.style.overflow = 'hidden';
       }
-   }
-
-   logout = () => {
-      Cookies.remove('token')
-      Cookies.remove('id')
-      Cookies.remove('username')
-      Cookies.remove('email')
-      Cookies.remove('avatar')
-      this.setState({ isTokenPresent: false })
-   }
-
-   removeActive = () => {
-      const menu = document.querySelector('.header_nav_menu')
-      const lines = document.querySelectorAll('.burger_line')
-      menu.classList.remove('active')
-      lines.forEach(line => {
-         line.classList.remove('active')
-      })
    }
 
    render() {
       return (
-          <header className="header">
+          <div className="subheader" ref={this.subheaderContainerRef}>
              <div className="container">
-                <div className="header_nav">
-                   <h1>{this.props.title}</h1>
-                   <nav>
-                      <ul className="header_nav_menu">
-                         <li>
-                            <Link to={"/home"} onClick={this.removeActive}>Главная страница</Link>
-                         </li>
-                         <li>
-                            <Link to={"/blogs"} onClick={this.removeActive}>Блоги</Link>
-                         </li>
-                         <li>
-                            <Link to={"/authors"} onClick={this.removeActive}>Авторы</Link>
-                         </li>
-                         {this.state.isTokenPresent ? (
-                             <React.Fragment>
-                                <li>
-                                   <Link to="/profile" onClick={this.removeActive}>Профиль</Link>
-                                </li>
-                                <li>
-                                   <Link to="/home" onClick={this.logout}>Выйти</Link>
-                                </li>
-                             </React.Fragment>
-                         ) : (
-                             <li>
-                                <Link to="/signin" onClick={this.removeActive}>Войти</Link>
-                             </li>
-                         )}
-                      </ul>
-                      <div className="burger" onClick={this.toggleBurger}>
-                         <span className="burger_line"></span>
-                         <span className="burger_line"></span>
-                         <span className="burger_line"></span>
+                <div className="subheader_container">
+                   <div className="subheader_container_left">
+                      <div className="subheader_burger" onClick={this.tooggleBurger}>
+                         <span className="subheader_burger_line"></span>
+                         <span className="subheader_burger_line"></span>
+                         <span className="subheader_burger_line"></span>
                       </div>
-                   </nav>
+                      <div className="subheader_container_menu">
+                         <div className="subheader_container_menu_wrapper">
+                            <h3 className="subheader_container_menu_title">Меню</h3>
+                            <HeaderMenu/>
+                         </div>
+                         <div className="subheader_container_menu_wrapper">
+                            <HeaderServices/>
+                         </div>
+                      </div>
+                      <h1 className="subheader_container_left_title">
+                      <a href="#">{this.props.title}</a>
+                      </h1>
+                      <button className="subheader_container_left_buttonArrow" onClick={this.ButtonArrowClick}>
+                         <img src="img/icons/icons8-arrow-down.png" alt=""/>
+                      </button>
+                      <button className="subheader_container_left_buttonAuthor">
+                         <span>Как стать автором</span>
+                      </button>
+                      <div className="subheader_container_left_list">
+                         <HeaderServices/>
+                      </div>
+                   </div>
+                   <div className="subheader_container_rigth">
+                      <a href="#" className="subheader_container_rigth_text">
+                         Как расширяется вселенная кода GitVerse
+                      </a>
+                   </div>
+                   <div className="subheader_container_profile">
+                      <HeaderProfile/>
+                   </div>
                 </div>
              </div>
-          </header>
-      );
+          </div>
+
+      )
    }
 }
 
-export default Header;
+export default Header

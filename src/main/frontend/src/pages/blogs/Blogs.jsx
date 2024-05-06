@@ -21,12 +21,13 @@ const BlogProfiles = () => {
     }, []);
 
     return blogProfiles.map((blogProfile, index) => {
-
         return (
             <div className="blog" key={index}>
-                <img src={blogProfile.img} alt=""/>
                 <h2>{blogProfile.title}</h2>
-                {/*<p>{blogProfile.description}</p>*/}
+                <div className="blog_container_img">
+                    <img src={blogProfile.img} alt=""/>
+                </div>
+                <p>{blogProfile.description}</p>
             </div>
         );
     });

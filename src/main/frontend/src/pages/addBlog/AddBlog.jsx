@@ -18,7 +18,7 @@ class AddBlog extends React.Component {
         const data = {
             title: formData.get("title"),
             description: formData.get("description"),
-            img: "https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640528715_49-abrakadabra-fun-p-serii-chelovek-na-avu-56.jpg"
+            img: formData.get("img"),
         };
 
         console.log(data)

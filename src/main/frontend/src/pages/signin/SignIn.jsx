@@ -31,7 +31,10 @@ const SignIn = () => {
             .post(baseUrl, data)
             .then((response) => {
                 const token = response.data;
+
+                // TODO: save token in local storage
                 localStorage.setItem('token', token);
+
                 axios
                     .get(getUser, {
                     params: {

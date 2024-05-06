@@ -28,7 +28,6 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BlogRepository blogRepository;
-    private final RequestCounter requestCounter;
 
     private static final Logger logger = Logger.getLogger(UserService.class.getName());
 
@@ -38,7 +37,6 @@ public class UserService implements UserDetailsService {
     private static final String BLOG_ALREADY_EXIST = "Blog already exist";
 
     public List<User> getUsers() {
-        requestCounter.increment();
         return userRepository.findAll();
     }
 
