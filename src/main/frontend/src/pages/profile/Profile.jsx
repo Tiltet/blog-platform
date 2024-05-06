@@ -18,8 +18,7 @@ class Profile extends React.Component {
         if (token) {
             this.setState({ isTokenPresent: true });
         }
-
-        if (this.avatar) {
+        else if (this.avatar) {
             console.log(this.avatar)
             this.avatar = "https://abrakadabra.fun/uploads/posts/2021-12/thumbs/1640528715_49-abrakadabra-fun-p-serii-chelovek-na-avu-56.jpg"
         }

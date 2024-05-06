@@ -45,9 +45,9 @@ public class LoggingAspect {
         logger.error("ERROR: {}.{}", className, methodName);
     }
 
-    @After("execution(* com.example.blog.services.UserService.*(..))")
+    @After("execution(* com.example.blog.services.UserService.getUsers())")
     public void logRequestCounter() {
-        logger.info("NEW REQUEST: " + requestCounter.get());
+        logger.info("NEW REQUEST: " + requestCounter.increment());
     }
 
     /*

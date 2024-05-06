@@ -1,91 +1,133 @@
 // Header
 
-@import "../../sass/_variable"
-@import "../../sass/_mixins"
-
-.header
-    position: sticky
-    top: 0
-    z-index: 999
-    width: 100%
-    padding: 20px
-    background-color: $header-color
-    &_nav
-        width: 100%
+.subheader
+    padding: 10px 0
+    background-color: $main_background_color
+    &_container
         display: flex
-        justify-content: space-between
         align-items: center
-        h1
-            font-size: 36px
+        justify-content: space-between
         &_menu
+            display: none
+        .active
+            display: block
+        &_left
             display: flex
-            justify-content: end
-            list-style-type: none
-            transition: 0.5s
-            li
-                font-size: 18px
-                padding: 0 20px
+            justify-content: left
+            align-items: center
+            &_title
+                padding: 0 15px 0 0
+                font-size: 28px
+                border-right: 1.5px solid #495057
+            &_buttonArrow
+                margin-left: 15px
+                padding: 0
+                cursor: pointer
+                border: none
+                background-color: $main_background_color
+                width: 30px
+                height: 30px
+                img
+                    width: 30px
+                    height: 30px
+            &_buttonAuthor
+                padding: 5px 0
+                margin: 2px 0 2px 15px
+                background-color: black
+                border: 1px solid white
+                border-radius: 3px
+                cursor: pointer
+                span
+                    padding: 0 10px
+                    font-size: 14px
+                    text-transform: uppercase
+                    color: white
+            &_list
+                display: none
+            &_list.active
+                background: #171717
+                position: absolute
+                z-index: 3
+                display: block
+                top: 60px
                 border-radius: 5px
-        &_menu.active
-            background-color: $header-color
-            // opacity: 0.5
-            // backdrop-filter: blur(20px)
-            // overflow: hidden
-            transform: translateY(0)
-            li
-                padding-top: 80px
-
-.burger
-    display: none
-    .burger_line
-        display: block
-        width: 30px
-        height: 3px
-        background-color: white
-        margin-bottom: 5px
-        transition: 0.5s
-
-    .active:first-child
-        width: 40px
-        transform: translateY(8px) rotate(45deg)
-    .active:nth-child(2)
-        transition: 0s
-        opacity: 0
-    .active:last-child
-        width: 40px
-        transform: translateY(-8px) rotate(-45deg)
-
+                box-shadow: 0 0 20px 1px rgba(255, 255, 255, 0.2)
+                ul
+                    display: flex
+                    flex-direction: column
+                    padding: 0
+                    list-style-type: none
+                    h2
+                        margin: 0 20px
+                        padding: 10px 0
+                        font-weight: 500
+                        color: #919191
+                        font-size: 18px
+                        border-bottom: 1px solid #495057
+                    a
+                        padding: 10px 20px
+                        font-size: 14px
+                        h3
+                            padding: 0
+                            margin: 0
+                            font-size: 24px
+                            font-weight: 300
+                        p
+                            padding: 0
+                            margin: 0
+                            font-size: 14px
+                            color: #919191
+                    a:hover
+                        background-color: #000
+        &_rigth
+            display: flex
+            justify-content: right
+            &_text
+                color: #0dcaf0
+        &_profile
+            display: none
 
 @include laptop
-    .header
-        &_nav
-            h1
-                font-size: 36px
-            ul
-                width: 100%
-                height: 100%
-                li
-                    padding: 0 15px
-                    a
-                        font-size: 16px
+    .subheader_container
+        &_profile
+            display: block
+        &_rigth
+            &_text
+                display: none
 
 @include table
-    .header
-        &_nav
-            h1
-                font-size: 26px
-            ul
-                position: fixed
+    .subheader
+        &_container
+            &_left
+                &_title
+                    padding-left: 20px
+                    border: none
+                &_buttonArrow
+                    display: none
+                &_buttonAuthor
+                    display: none
+            &_menu
+                position: absolute
                 top: 0
                 left: 0
-                display: flex
-                flex-direction: column
-                justify-content: start
-                align-items: center
-                transform: translateY(-100%)
-                li
-                    a
-                        font-size: 24px
-    .burger
-        position: static
-        display: block
+                height: 100%
+                width: 40%
+                background-color: $header-color
+                &_wrapper
+                    padding: 20px
+                    border-bottom: 1px solid $main_background_color
+                &_title
+                    text-transform: uppercase
+                    font-weight: 300
+                    font-size: 18px
+                    text-align: left
+        &_burger
+            margin-top: 4px
+            display: block
+            &_line
+                display: block
+                width: 30px
+                height: 3px
+                background-color: white
+                margin-bottom: 5px
+                transition: 0.5s

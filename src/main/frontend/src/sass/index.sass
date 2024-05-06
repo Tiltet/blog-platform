@@ -1,25 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap')
 @import "_variable"
 @import "_mixins"
-@import "../pages/home/homePage"
-@import "../pages/authors/authors"
-@import "../pages/blogs/blogs"
-@import "../pages/signin/signin"
-@import "../pages/signup/signup"
-@import "../pages/profile/profile"
-@import "../pages/addBlog/addBlog"
 @import "../components/header/header"
 @import "../components/user/user"
+@import "../components/subheader/subheader"
 @import "../elements/buttons/buttonGreen"
-
-$main_font: "Roboto", sans-serif
-$main_text_color: #fff
+@import "../elements/header_profile/headerProfile"
+@import "../elements/header_menu/headerMenu"
+@import "../elements/header_services/headerServices"
+@import "../pages/addBlog/addBlog"
+@import "../pages/authors/authors"
+@import "../pages/blogs/blogs"
+@import "../pages/home/homePage"
+@import "../pages/profile/profile"
+@import "../pages/signin/signin"
+@import "../pages/signup/signup"
     
 body
     color: $main_text_color
     font-family: $main_font
-    background-color: #333
+    background-color: #0d0d0d
+    line-height: 1
     
 .container
-    max-width: 1200px
+    max-width: 1260px
     margin: 0 auto
+    padding: 0 30px

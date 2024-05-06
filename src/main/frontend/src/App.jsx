@@ -11,6 +11,7 @@ import User from "./components/user/User";
 import SignUp from "./pages/signup/SignUp";
 import Profile from "./pages/profile/Profile";
 import AddBlog from "./pages/addBlog/AddBlog";
+import Subheader from "./components/subheader/Subheader";
 
 
 class App extends React.Component {
@@ -19,7 +20,8 @@ class App extends React.Component {
         return (
             <Router>
                 <div className="App">
-                    <Header title="Blog Platform"/>
+                    <Header title="Blog"/>
+                    <Subheader/>
                     <Routes>
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/blogs" element={<Blogs/>} />
