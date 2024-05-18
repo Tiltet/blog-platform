@@ -1,12 +1,49 @@
-ul
+.header_services
+    display: flex
+    flex-direction: column
     padding: 0
+    list-style-type: none
+    h2
+        margin: 0 20px 10px 20px
+        padding: 20px 0 10px 0
+        font-weight: 500
+        color: #919191
+        font-size: 18px
+        border-bottom: 1px solid #495057
+    a
+        padding: 10px 20px
+        font-size: 14px
+        h3
+            padding: 5px 0
+            margin: 0
+            font-size: 24px
+            font-weight: 300
+        p
+            padding: 0
+            margin: 0
+            font-size: 14px
+            color: #919191
+    a:last-child
+        margin-bottom: 10px
+    a:hover
+        background-color: #000
 
 @include table
     .header_services
         h2
-            font-size: 18px
+            padding: 0 0 10px 0
+            margin: 0
+            font-size: 16px
+            border: none
+            text-transform: uppercase
         a
+            padding: 10px 0
+            margin: 0
             h3
-                padding: 5px 0
+                font-size: 18px
+                font-weight: 400
+                padding: 0
             p
                 display: none
+        a:last-child
+            margin-bottom: 0

@@ -38,7 +38,7 @@ class HeaderProfile extends React.Component {
                 {this.state.isTokenPresent ? (
                     <React.Fragment>
                         <li>
-                            <Link onClick={this.removeActive} to="/">
+                            <Link to="/profile" onClick={this.removeActive}>
                                 <img className="header_profile_avatar" src={Cookies.get('avatar')} alt=""/>
                             </Link>
                         </li>

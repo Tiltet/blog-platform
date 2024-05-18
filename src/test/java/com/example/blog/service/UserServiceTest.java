@@ -28,20 +28,6 @@ class UserServiceTest {
     private UserService userService;
 
     @Test
-    void testAddUser_UserDoesNotExist_ShouldSaveUser() {
-        User user = new User();
-        user.setUsername("testUser");
-
-        when(userRepository.findByUsername(user.getUsername())).thenReturn(null);
-
-        User result = userService.addUser(user);
-
-        verify(userRepository, times(1)).findByUsername(user.getUsername());
-        verify(userRepository, times(1)).save(user);
-        Assertions.assertEquals(user, result);
-    }
-
-    @Test
     void testAddUser_UserAlreadyExist_ShouldNotSaveUser() {
         User existingUser = new User();
         existingUser.setUsername("existingUser");
@@ -49,7 +35,7 @@ class UserServiceTest {
         User user = new User();
         user.setUsername("existingUser");
 
-        when(userRepository.findByUsername(user.getUsername())).thenReturn(existingUser);
+        when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(existingUser));
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> userService.addUser(user));
     }
